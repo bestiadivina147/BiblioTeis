@@ -9,7 +9,7 @@
 
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
-        android:layout_height="206dp"
+        android:layout_height="wrap_content"
         android:layout_marginTop="10dp"
         android:layout_marginBottom="10dp"
         tools:layout_editor_absoluteX="1dp"
@@ -17,7 +17,9 @@
 
 
         <ImageView
-            android:id="@+id/imageView2"
+            android:id="@+id/imgFrLibro"
+            android:layout_marginTop="10dp"
+            android:layout_marginLeft="10dp"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             app:layout_constraintStart_toStartOf="parent"
@@ -27,8 +29,8 @@
         <androidx.constraintlayout.widget.ConstraintLayout
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            app:layout_constraintStart_toEndOf="@+id/imageView2"
-            app:layout_constraintTop_toTopOf="@+id/imageView2">
+            app:layout_constraintStart_toEndOf="@+id/imgFrLibro"
+            app:layout_constraintTop_toTopOf="@+id/imgFrLibro">
 
             <TextView
                 android:id="@+id/textView14"
@@ -85,11 +87,12 @@
 
         <LinearLayout
             android:id="@+id/linearLayout"
+            android:layout_marginTop="10dp"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:orientation="horizontal"
-            tools:layout_editor_absoluteX="1dp"
-            tools:layout_editor_absoluteY="129dp">
+            app:layout_constraintStart_toStartOf="@+id/imgFrLibro"
+            app:layout_constraintTop_toBottomOf="@+id/imgFrLibro">
 
             <TextView
                 android:id="@+id/textView23"
@@ -120,6 +123,9 @@
 
         <Button
             android:id="@+id/button"
+            android:backgroundTint="@color/azul"
+            android:layout_marginTop="10dp"
+            android:layout_marginBottom="10dp"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="Mas"
