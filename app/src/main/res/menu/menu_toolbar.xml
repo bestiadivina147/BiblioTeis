@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    >
+
+    <item
+        android:id="@+id/opcion_usuario"
+        android:icon="@drawable/usuario"
+        android:title="@string/opcion_usuario"
+        app:showAsAction="ifRoom" />
+
+    <item
+        android:id="@+id/opcion_inicio"
+        android:title="@string/opcion_inicio"
+        app:showAsAction="never" />
+
+    <item
+        android:id="@+id/opcion_libreria"
+        android:title="@string/opcion_libreria"
+        app:showAsAction="never" />
+
+    <item
+        android:id="@+id/cerrar_sesion"
+        android:title="@string/cerrar_sesion"
+        app:showAsAction="never" />
+
+</menu>
