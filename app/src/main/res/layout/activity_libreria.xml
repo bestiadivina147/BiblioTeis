@@ -20,7 +20,7 @@
                 android:id="@+id/libroToolbar"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
-                android:background="?attr/colorPrimary"
+                android:background="@color/primario"
                 android:minHeight="?attr/actionBarSize"
                 android:theme="?attr/actionBarTheme"
                 app:layout_constraintEnd_toEndOf="parent"
@@ -80,7 +80,7 @@
             <Button
                 android:id="@+id/btnFiltrar"
                 android:layout_marginTop="20dp"
-                android:backgroundTint="@color/azul"
+                android:backgroundTint="@color/secundario"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="Filtrar"

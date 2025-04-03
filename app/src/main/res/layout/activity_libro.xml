@@ -143,7 +143,7 @@
 
     <Button
         android:id="@+id/btnPrestar"
-        android:backgroundTint="@color/azul"
+        android:backgroundTint="@color/secundario"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="Prestar"
@@ -155,7 +155,7 @@
 
     <Button
         android:id="@+id/btnDevolver"
-        android:backgroundTint="@color/azul"
+        android:backgroundTint="@color/secundario"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="Devolver"
@@ -180,7 +180,7 @@
         android:id="@+id/libroToolbar"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
-        android:background="?attr/colorPrimary"
+        android:background="@color/primario"
         android:minHeight="?attr/actionBarSize"
         android:theme="?attr/actionBarTheme"
         app:layout_constraintEnd_toEndOf="parent"

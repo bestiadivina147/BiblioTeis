@@ -1,13 +1,10 @@
 <resources>
     <color name="black">#FF000000</color>
     <color name="white">#FFFFFFFF</color>
-    <color name="mint_green">#A5D6A7</color>
-    <color name="green">#4CAF50</color>
-    <color name="red">#F44336</color>
+    <color name="succes">#4CAF50</color>
+    <color name="danger">#F44336</color>
     <color name="gris">#D3D3D3</color>
-    <color name="azulon">#122848</color>
-    <color name="azul">#0B4576</color>
-    <color name="rojo">#FF9696</color>
+    <color name="primario">#122848</color>
+    <color name="secundario">#0B4576</color>
     <color name="warning">#FFEB3B</color>
-
 </resources>
