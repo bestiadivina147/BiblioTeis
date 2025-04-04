@@ -1,10 +1,10 @@
 <resources>
-    <color name="black">#FF000000</color>
-    <color name="white">#FFFFFFFF</color>
-    <color name="succes">#4CAF50</color>
-    <color name="danger">#F44336</color>
-    <color name="gris">#D3D3D3</color>
-    <color name="primario">#122848</color>
-    <color name="secundario">#0B4576</color>
-    <color name="warning">#FFEB3B</color>
+    <color name="black">#212121</color>
+    <color name="white">#FAFAFA</color>
+    <color name="succes">#66BB6A</color>
+    <color name="danger">#E53935</color>
+    <color name="gris">#E0E0E0</color>
+    <color name="primario">#2196F3</color>
+    <color name="secundario">#1565C0</color>
+    <color name="warning">#FFC107</color>
 </resources>

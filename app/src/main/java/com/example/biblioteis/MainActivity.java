@@ -22,7 +22,7 @@ public class MainActivity extends AppCompatActivity {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
-        startActivity(new Intent(this, LogingActivity.class));
+        startActivity(new Intent(this, InicioActivity.class));
         super.onCreate(savedInstanceState);
         EdgeToEdge.enable(this);
         setContentView(R.layout.activity_main);
@@ -33,39 +33,7 @@ public class MainActivity extends AppCompatActivity {
         });
     }
 
-    private void setupToolbar(AppCompatActivity activity) {
-        Toolbar toolbar = activity.findViewById(R.id.libroToolbar);
-        activity.setSupportActionBar(toolbar);
-        activity.addMenuProvider(new MenuProvider() {
-            @Override
-            public void onCreateMenu(@NonNull Menu menu, @NonNull MenuInflater menuInflater) {
-                menuInflater.inflate(R.menu.menu_toolbar, menu);
-                menu.findItem(R.id.opcion_inicio).setVisible(false);
-            }
 
-            @Override
-            public boolean onMenuItemSelected(@NonNull MenuItem menuItem) {
-                if (menuItem.getItemId() == R.id.cerrar_sesion) {
-                    activity.startActivity(new Intent(activity, MainActivity.class)
-                            .setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK));
-                    return true;
-                }
-
-                if (menuItem.getItemId() == R.id.opcion_usuario) {
-                    activity.startActivity(new Intent(activity, UsuarioActivity.class)
-                            .setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK));
-                    return true;
-                }
-                if (menuItem.getItemId() == R.id.opcion_libreria) {
-                    activity.startActivity(new Intent(activity, LibreriaActivity.class)
-                            .setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK));
-                    return true;
-                }
-
-                return false;
-            }
-        });
-    }
 
 
 }

@@ -3,11 +3,7 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     >
 
-    <item
-        android:id="@+id/opcion_usuario"
-        android:icon="@drawable/usuario"
-        android:title="@string/opcion_usuario"
-        app:showAsAction="ifRoom" />
+
 
     <item
         android:id="@+id/opcion_inicio"
@@ -15,9 +11,16 @@
         app:showAsAction="never" />
 
     <item
+        android:id="@+id/opcion_usuario"
+        android:icon="@drawable/usuario"
+        android:title="@string/opcion_usuario"
+        app:showAsAction="ifRoom" />
+
+    <item
         android:id="@+id/opcion_libreria"
         android:title="@string/opcion_libreria"
-        app:showAsAction="never" />
+        android:icon="@drawable/libro"
+        app:showAsAction="ifRoom" />
 
     <item
         android:id="@+id/cerrar_sesion"
