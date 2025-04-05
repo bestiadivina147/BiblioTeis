@@ -2,8 +2,10 @@ package com.example.biblioteis;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
 import android.widget.Button;
+import android.widget.Toast;
 
 import androidx.activity.EdgeToEdge;
 import androidx.appcompat.app.AppCompatActivity;
@@ -24,13 +26,12 @@ public class LogingActivity extends AppCompatActivity {
             v.setPadding(systemBars.left, systemBars.top, systemBars.right, systemBars.bottom);
             return insets;
         });
-//        btnLogin.setOnClickListener(new View.OnClickListener() {
-//            @Override
-//            public void onClick(View v) {
-//                // Inicia la nueva Activity
-//                Intent intent = new Intent(LogingActivity.this, InicioActivity.class);
-//                startActivity(intent);
-//            }
-//        });
+        btnLogin = findViewById(R.id.btnLogin);
+        btnLogin.setOnClickListener(v -> {
+            Toast.makeText(LogingActivity.this, "Login correcto", Toast.LENGTH_SHORT).show();
+            Intent intent = new Intent(LogingActivity.this, InicioActivity.class);
+            startActivity(intent);
+        });
+
     }
 }
