@@ -9,6 +9,12 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
 import androidx.core.view.MenuProvider;
 
+import com.example.biblioteis.activities.InicioActivity;
+import com.example.biblioteis.activities.LibreriaActivity;
+import com.example.biblioteis.activities.LibroActivity;
+import com.example.biblioteis.activities.LogingActivity;
+import com.example.biblioteis.activities.UsuarioActivity;
+
 public class ToolbarUtils {
 
     public static void setupToolbar(AppCompatActivity activity) {

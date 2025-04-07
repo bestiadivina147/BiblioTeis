@@ -5,7 +5,7 @@
     android:id="@+id/main"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".LibreriaActivity">
+    tools:context=".activities.LibreriaActivity">
 
     <androidx.core.widget.NestedScrollView
         android:layout_width="match_parent"
@@ -40,7 +40,7 @@
 
             <TextView
                 android:id="@+id/etfiltroautor"
-                android:layout_width="wrap_content"
+                android:layout_width="100dp"
                 android:layout_height="wrap_content"
                 android:textSize="20sp"
                 android:text=""
@@ -60,7 +60,7 @@
 
             <TextView
                 android:id="@+id/etfiltrotitulo"
-                android:layout_width="wrap_content"
+                android:layout_width="100dp"
                 android:layout_height="wrap_content"
                 android:text=""
                 android:textSize="20sp"
