@@ -39,6 +39,16 @@
         android:layout_height="wrap_content"
         android:hint="Contraseña"
         android:inputType="textPassword"/>
+
+    <TextView
+        android:id="@+id/txtLoginError"
+        android:visibility="invisible"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Error al iniciar sesion"
+        android:textColor="@color/danger"
+        android:textSize="15sp" />
+
     <Button
         android:id="@+id/btnLogin"
         android:layout_margin="30dp"
@@ -46,6 +56,7 @@
         android:layout_height="wrap_content"
         android:backgroundTint="@color/secundario"
         android:text="Iniciar Sesión"/>
+
 
 
 

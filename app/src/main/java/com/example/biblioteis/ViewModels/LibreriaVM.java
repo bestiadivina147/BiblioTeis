@@ -2,10 +2,11 @@ package com.example.biblioteis.ViewModels;
 
 import androidx.lifecycle.LiveData;
 import androidx.lifecycle.MutableLiveData;
+import androidx.lifecycle.ViewModel;
 
 import com.example.biblioteis.models.Libro;
 
-public class LibreriaVM {
+public class LibreriaVM extends ViewModel {
 
     private Libro libro;
     private MutableLiveData<Libro> libroMutableLiveData = new MutableLiveData<>();
