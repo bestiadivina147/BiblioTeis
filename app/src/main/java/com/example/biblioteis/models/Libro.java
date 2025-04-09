@@ -67,6 +67,7 @@ public class Libro {
         this.imagen = imagen;
     }
 
+
     public Libro() {
     }
 }

@@ -5,25 +5,11 @@ import androidx.lifecycle.MutableLiveData;
 import androidx.lifecycle.ViewModel;
 
 import com.example.biblioteis.models.Libro;
+import com.example.biblioteis.models.LogingData;
 
 public class LibreriaVM extends ViewModel {
 
-    private Libro libro;
-    private MutableLiveData<Libro> libroMutableLiveData = new MutableLiveData<>();
+    public MutableLiveData<Libro> libroLD= new MutableLiveData<Libro>();
 
-    public LibreriaVM(Libro libro) {
-        this.libro = libro;
-    }
-    public LiveData<Libro> getUserLiveData() {
-        return libroMutableLiveData;
-    }
-    public void loadLibroData(int userId) {
-        libro.getAutor();
-        libro.getImagen();
-        libro.getIsbn();
-        libro.getFechaPublicacion();
-        libro.getTitulo();
-        libro.isEstado();
-    }
 
 }
