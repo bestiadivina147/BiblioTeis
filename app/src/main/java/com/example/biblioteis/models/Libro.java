@@ -5,12 +5,9 @@ import java.sql.Date;
 public class Libro {
     private String titulo;
     private String autor;
-    private Date fechaPublicacion;
+    private String fechaPublicacion;
     private String isbn;
-    private String usuario;
     private String imagen;
-    private int disponibles;
-    private int totales;
 
     public String getTitulo() {
         return titulo;
@@ -28,11 +25,11 @@ public class Libro {
         this.autor = autor;
     }
 
-    public Date getFechaPublicacion() {
+    public String getFechaPublicacion() {
         return fechaPublicacion;
     }
 
-    public void setFechaPublicacion(Date fechaPublicacion) {
+    public void setFechaPublicacion(String fechaPublicacion) {
         this.fechaPublicacion = fechaPublicacion;
     }
 
@@ -44,14 +41,6 @@ public class Libro {
         this.isbn = isbn;
     }
 
-    public String getUsuario() {
-        return usuario;
-    }
-
-    public void setUsuario(String usuario) {
-        this.usuario = usuario;
-    }
-
     public String getImagen() {
         return imagen;
     }
@@ -60,31 +49,14 @@ public class Libro {
         this.imagen = imagen;
     }
 
-    public int getDisponibles() {
-        return disponibles;
-    }
 
-    public void setDisponibles(int disponibles) {
-        this.disponibles = disponibles;
-    }
-
-    public int getTotales() {
-        return totales;
-    }
-
-    public void setTotales(int totales) {
-        this.totales = totales;
-    }
-
-    public Libro(String titulo, String autor, Date fechaPublicacion, String isbn, String usuario, String imagen, int disponibles, int totales) {
+    public Libro(String titulo, String autor, String fechaPublicacion, String isbn,  String imagen) {
         this.titulo = titulo;
         this.autor = autor;
         this.fechaPublicacion = fechaPublicacion;
         this.isbn = isbn;
-        this.usuario = usuario;
         this.imagen = imagen;
-        this.disponibles = disponibles;
-        this.totales = totales;
+
     }
 
     public Libro() {

@@ -26,8 +26,9 @@
             tools:src="@tools:sample/avatars" />
 
         <androidx.constraintlayout.widget.ConstraintLayout
-            android:layout_width="wrap_content"
+            android:layout_width="0dp"
             android:layout_height="wrap_content"
+            app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toEndOf="@+id/imgFrLibro"
             app:layout_constraintTop_toTopOf="@+id/imgFrLibro">
 
@@ -60,15 +61,18 @@
                 app:layout_constraintTop_toBottomOf="@+id/textView16" />
 
             <TextView
-                android:id="@+id/etFrTitulo"
-                android:layout_width="wrap_content"
+                android:id="@+id/tvFrTitulo"
+                android:layout_width="0dp"
                 android:layout_height="wrap_content"
+                android:layout_marginStart="16dp"
+                android:layout_marginEnd="16dp"
                 android:text=""
+                app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toEndOf="@+id/textView14"
                 app:layout_constraintTop_toTopOf="@+id/textView14" />
 
             <TextView
-                android:id="@+id/etFrAutor"
+                android:id="@+id/tvFrAutor"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text=""
@@ -76,7 +80,7 @@
                 app:layout_constraintTop_toTopOf="@+id/textView16" />
 
             <TextView
-                android:id="@+id/etFrFecha"
+                android:id="@+id/tvFrFecha"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text=""
@@ -100,7 +104,7 @@
                 android:text="Disponibles:" />
 
             <TextView
-                android:id="@+id/etFrDisponibles"
+                android:id="@+id/tvFrDisponibles"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
@@ -113,7 +117,7 @@
                 android:text="Totales:" />
 
             <TextView
-                android:id="@+id/etFrTotales"
+                android:id="@+id/tvFrTotales"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
@@ -121,7 +125,7 @@
         </LinearLayout>
 
         <Button
-            android:id="@+id/button"
+            android:id="@+id/btnVerMas"
             android:backgroundTint="@color/secundario"
             android:layout_marginTop="10dp"
             android:layout_marginBottom="10dp"
