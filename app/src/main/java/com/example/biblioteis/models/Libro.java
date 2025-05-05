@@ -1,5 +1,7 @@
 package com.example.biblioteis.models;
 
+import com.example.biblioteis.API.models.Book;
+
 import java.sql.Date;
 
 public class Libro {
@@ -61,4 +63,6 @@ public class Libro {
 
     public Libro() {
     }
+
+
 }
