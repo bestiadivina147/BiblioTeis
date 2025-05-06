@@ -2,6 +2,7 @@ package com.example.biblioteis.API.retrofit;
 
 import com.example.biblioteis.API.models.Book;
 import com.example.biblioteis.API.models.BookLending;
+import com.example.biblioteis.API.models.LoginForm;
 import com.example.biblioteis.API.models.User;
 
 import java.util.List;
@@ -58,4 +59,7 @@ public interface ApiService {
     Call<Void> returnBook(@Path("id") int id);
     @GET("image/{filename}")
     Call<ResponseBody> getImage(@Path("filename") String fileName);
+
+    @POST("users/login")
+    Call<User> login(@Body LoginForm lf);
 }

@@ -11,6 +11,15 @@ public class LogingData {
         this.mensaje = mensaje;
     }
 
+    public LogingData(String usuario, String contrasenha) {
+        this.usuario = usuario;
+        this.contrasenha = contrasenha;
+    }
+
+    public LogingData(String msgError) {
+        this.mensaje = msgError;
+    }
+
     public String getContrasenha() {
         return contrasenha;
     }
