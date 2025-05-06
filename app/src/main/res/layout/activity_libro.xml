@@ -8,7 +8,7 @@
     tools:context=".activities.LibroActivity">
 
     <ImageView
-        android:id="@+id/imageView"
+        android:id="@+id/imgDetalle"
         android:layout_marginTop="40dp"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
@@ -23,7 +23,7 @@
         android:layout_height="227dp"
         android:layout_marginTop="40dp"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/imageView">
+        app:layout_constraintTop_toBottomOf="@+id/imgDetalle">
 
         <TextView
             android:id="@+id/textView2"
@@ -166,7 +166,7 @@
         app:layout_constraintTop_toBottomOf="@+id/constraintLayout" />
 
     <TextView
-        android:id="@+id/textView15"
+        android:id="@+id/txtNoDisponible"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="El libro no esta disponible en estos momentos"
