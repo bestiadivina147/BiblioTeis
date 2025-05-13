@@ -1,5 +1,7 @@
 package com.example.biblioteis.models;
 
+import android.graphics.Bitmap;
+
 public class LibroDetalle {
     private String image;
     private String titulo;
@@ -9,7 +11,15 @@ public class LibroDetalle {
     private Boolean estado;
     private int prestamos;
     private int user;
+    private Bitmap img;
 
+    public Bitmap getImg() {
+        return img;
+    }
+
+    public void setImg(Bitmap img) {
+        this.img = img;
+    }
 
     public int getUser() {
         return user;
@@ -76,6 +86,10 @@ public class LibroDetalle {
     }
 
     public LibroDetalle(String image, String titulo, String autor, String fecha, String isbn, Boolean estado, int prestamos,int user) {
+       this(image, titulo, autor, fecha, isbn, estado, prestamos, user, null);
+    }
+
+    public LibroDetalle(String image, String titulo, String autor, String fecha, String isbn, Boolean estado, int prestamos,int user, Bitmap img) {
         this.image = image;
         this.titulo = titulo;
         this.autor = autor;
@@ -84,5 +98,6 @@ public class LibroDetalle {
         this.estado = estado;
         this.prestamos = prestamos;
         this.user = user;
+        this.img = img;
     }
 }
