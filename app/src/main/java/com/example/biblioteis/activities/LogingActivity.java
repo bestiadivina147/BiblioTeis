@@ -48,7 +48,6 @@ public class LogingActivity extends AppCompatActivity {
                 Intent intent = new Intent(LogingActivity.this, InicioActivity.class);
                 startActivity(intent);
             }
-
         });
 
         btnLogin.setOnClickListener(l ->{

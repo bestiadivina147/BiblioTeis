@@ -27,7 +27,7 @@ public class LogingVM extends ViewModel {
             @Override
             public void onSuccess(User result) {
                 if(result == null){
-                    LogingData ld = new LogingData("asdasd");
+                    LogingData ld = new LogingData("Error al iniciar sesion");
                     logingLD.setValue(ld);
                     return;
                 }
@@ -38,7 +38,7 @@ public class LogingVM extends ViewModel {
             @Override
             public void onFailure(Throwable t) {
                 Log.e("LoginVM", "error onFailure");
-                LogingData ld = new LogingData("asdasd");
+                LogingData ld = new LogingData("Error al iniciar sesion");
                 logingLD.setValue(ld);
             }
 

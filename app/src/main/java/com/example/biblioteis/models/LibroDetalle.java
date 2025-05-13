@@ -6,8 +6,18 @@ public class LibroDetalle {
     private String autor;
     private String fecha;
     private String isbn;
-    private String estado;
+    private Boolean estado;
     private int prestamos;
+    private int user;
+
+
+    public int getUser() {
+        return user;
+    }
+
+    public void setUser(int user) {
+        this.user = user;
+    }
 
     public String getImage() {
         return image;
@@ -49,11 +59,11 @@ public class LibroDetalle {
         this.isbn = isbn;
     }
 
-    public String getEstado() {
+    public Boolean getEstado() {
         return estado;
     }
 
-    public void setEstado(String estado) {
+    public void setEstado(Boolean estado) {
         this.estado = estado;
     }
 
@@ -65,7 +75,7 @@ public class LibroDetalle {
         this.prestamos = prestamos;
     }
 
-    public LibroDetalle(String image, String titulo, String autor, String fecha, String isbn, String estado, int prestamos) {
+    public LibroDetalle(String image, String titulo, String autor, String fecha, String isbn, Boolean estado, int prestamos,int user) {
         this.image = image;
         this.titulo = titulo;
         this.autor = autor;
@@ -73,5 +83,6 @@ public class LibroDetalle {
         this.isbn = isbn;
         this.estado = estado;
         this.prestamos = prestamos;
+        this.user = user;
     }
 }

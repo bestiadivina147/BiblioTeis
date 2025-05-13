@@ -1,5 +1,6 @@
 package com.example.biblioteis.API.models;
 
+import java.util.ArrayList;
 import java.util.List;
 
 public class Book {
@@ -64,6 +65,9 @@ public class Book {
     }
 
     public List<BookLending> getBookLendings() {
+        if (bookLendings== null){
+            return new ArrayList<BookLending>();
+        }
         return bookLendings;
     }
 

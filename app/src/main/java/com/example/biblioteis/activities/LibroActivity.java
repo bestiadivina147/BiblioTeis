@@ -1,6 +1,7 @@
 package com.example.biblioteis.activities;
 
 import android.os.Bundle;
+import android.view.View;
 import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.TextView;
@@ -17,8 +18,10 @@ import com.example.biblioteis.R;
 import com.example.biblioteis.ToolbarUtils;
 import com.example.biblioteis.ViewModels.DetalleVM;
 import com.example.biblioteis.ViewModels.LibreriaVM;
+import com.example.biblioteis.models.LibroDetalle;
 
 public class LibroActivity extends AppCompatActivity {
+    protected static final String BOOK_ID = "bookId";
 
     private ImageView img;
     private TextView etTitulo, etAutor, etFecha,etISBN,etEstado,etPrestamos,txtNoDisponible;
@@ -49,15 +52,24 @@ public class LibroActivity extends AppCompatActivity {
         //OBTENER VM
         vm = new ViewModelProvider(this).get(DetalleVM.class);
         //OBSERVAR VM
-        vm.librosLD.observe(this, libros ->{
-//            etTitulo.setText(libro.getAutor());
-//            lvh.tvTitulo.setText(libro.getTitulo());
-//            lvh.tvFecha.setText(libro.getFechaPublicacion());
-//            lvh.tvDisponibles.setText(0 + "");
-//            lvh.tvTotales.setText(0 + "");
+        vm.librosLD.observe(this, libro ->{
+            etTitulo.setText(libro.getTitulo());
+            etAutor.setText(libro.getAutor());
+            etFecha.setText(libro.getFecha());
+            etISBN.setText(libro.getIsbn());
+            etPrestamos.setText(libro.getPrestamos() + "");
 
+
+            if(libro.getEstado()){
+                etEstado.setText("Disponible");
+                btnPrestar.setVisibility(View.VISIBLE);
+            }
+            if(!libro.getEstado()){
+                etEstado.setText("No Disponible");
+            }
         });
         //VINCULAR ACCIONES
-
+        int id = getIntent().getExtras().getInt(BOOK_ID);
+        vm.load(id);
     }
 }

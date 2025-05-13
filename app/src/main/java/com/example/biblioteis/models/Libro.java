@@ -5,12 +5,28 @@ import com.example.biblioteis.API.models.Book;
 import java.sql.Date;
 
 public class Libro {
+    private Integer id;
     private String titulo;
     private String autor;
     private String fechaPublicacion;
     private String isbn;
     private String imagen;
 
+    public Libro(Integer id, String titulo, String autor, String fechaPublicacion, String isbn, String imagen) {
+        this.id = id;
+        this.titulo = titulo;
+        this.autor = autor;
+        this.fechaPublicacion = fechaPublicacion;
+        this.isbn = isbn;
+        this.imagen = imagen;
+    }
+
+    public Integer getId() {
+        return id;
+    }
+    public void setId(Integer id) {
+        this.id = id;
+    }
     public String getTitulo() {
         return titulo;
     }
