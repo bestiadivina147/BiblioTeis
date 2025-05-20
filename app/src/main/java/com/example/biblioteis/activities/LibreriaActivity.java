@@ -78,8 +78,6 @@ public class LibreriaActivity extends AppCompatActivity {
                         imgLibro = iv.findViewById(R.id.imgFrLibro);
                         cl = iv.findViewById(R.id.libroConstraint);
                         btnVerMas = iv.findViewById(R.id.btnVerMas);
-
-
                     }
                 }
 
