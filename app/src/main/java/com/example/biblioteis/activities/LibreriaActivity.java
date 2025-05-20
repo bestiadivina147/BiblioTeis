@@ -13,6 +13,7 @@ import android.widget.TextView;
 import androidx.activity.EdgeToEdge;
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.constraintlayout.widget.ConstraintLayout;
 import androidx.core.graphics.Insets;
 import androidx.core.view.ViewCompat;
 import androidx.core.view.WindowInsetsCompat;
@@ -63,6 +64,8 @@ public class LibreriaActivity extends AppCompatActivity {
                     public ImageView imgLibro;
                     public Button btnVerMas;
 
+                    public ConstraintLayout cl;
+
                     public LibroViewHolder(@NonNull View iv) {
                         super(iv);
 
@@ -73,7 +76,10 @@ public class LibreriaActivity extends AppCompatActivity {
                         tvTotales = iv.findViewById(R.id.tvFrTotales);
 
                         imgLibro = iv.findViewById(R.id.imgFrLibro);
+                        cl = iv.findViewById(R.id.libroConstraint);
                         btnVerMas = iv.findViewById(R.id.btnVerMas);
+
+
                     }
                 }
 
@@ -106,6 +112,12 @@ public class LibreriaActivity extends AppCompatActivity {
                         intent.putExtra(LibroActivity.BOOK_ID, libro.getId());
                         startActivity(intent);
                     });
+                    lvh.cl.setOnClickListener(l->{
+                        Intent intent = new Intent(LibreriaActivity.this, LibroActivity.class);
+                        intent.putExtra(LibroActivity.BOOK_ID, libro.getId());
+                        startActivity(intent);
+                    });
+
 
                 }
 

@@ -2,12 +2,13 @@
 <FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/librocont"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
-    android:paddingTop="5dp"
-    tools:context=".Libro">
+    android:paddingTop="5dp">
 
     <androidx.constraintlayout.widget.ConstraintLayout
+        android:id="@+id/libroConstraint"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginTop="10dp"
@@ -90,9 +91,9 @@
 
         <LinearLayout
             android:id="@+id/linearLayout"
-            android:layout_marginTop="10dp"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:layout_marginTop="10dp"
             android:orientation="horizontal"
             app:layout_constraintStart_toStartOf="@+id/imgFrLibro"
             app:layout_constraintTop_toBottomOf="@+id/imgFrLibro">
@@ -126,11 +127,11 @@
 
         <Button
             android:id="@+id/btnVerMas"
-            android:backgroundTint="@color/secundario"
-            android:layout_marginTop="10dp"
-            android:layout_marginBottom="10dp"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:layout_marginTop="10dp"
+            android:layout_marginBottom="10dp"
+            android:backgroundTint="@color/secundario"
             android:text="Mas"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
