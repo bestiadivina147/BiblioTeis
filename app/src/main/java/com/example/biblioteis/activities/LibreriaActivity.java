@@ -95,7 +95,11 @@ public class LibreriaActivity extends AppCompatActivity {
                     lvh.tvFecha.setText(libro.getFechaPublicacion());
                     lvh.tvDisponibles.setText(0 + "");
                     lvh.tvTotales.setText(0 + "");
-                    lvh.imgLibro.setImageBitmap(libro.getImg());
+                    if(libro.getImg()!=null){
+                        lvh.imgLibro.setImageBitmap(libro.getImg());
+                    }else{
+                        lvh.imgLibro.setImageResource(R.drawable.icono);
+                    }
 
                     lvh.btnVerMas.setOnClickListener(l->{
                         Intent intent = new Intent(LibreriaActivity.this, LibroActivity.class);

@@ -46,7 +46,10 @@ public class LibreriaVM extends ViewModel {
                     }
 
                     //Cuerpo objeto
-                    libros.add(BookMapper.book2Libro(book));
+
+                    Libro l = BookMapper.book2Libro(book);
+                    obtenerImagen(book, l, libros);
+                    libros.add(l);
 
                     //Post condiciones
                 }
@@ -73,23 +76,7 @@ public class LibreriaVM extends ViewModel {
                     Libro l = BookMapper.book2Libro(book);
                     libros.add(l);
 
-                    if(book.getBookPicture()==null)return;
-                    imageRepository.getImage(book.getBookPicture(), new BookRepository.ApiCallback<ResponseBody>() {
-                        @Override
-                        public void onSuccess(ResponseBody result) {
-                            if(result==null)return;
-
-                            Bitmap bm = BitmapFactory.decodeStream(result.byteStream());
-                            l.setImg(bm);
-                            librosLD.setValue(libros);
-
-                        }
-
-                        @Override
-                        public void onFailure(Throwable t) {
-
-                        }
-                    });
+                    obtenerImagen(book, l, libros);
 
 
                 }
@@ -102,5 +89,25 @@ public class LibreriaVM extends ViewModel {
             }
         });
 
+    }
+
+    private void obtenerImagen(Book book, Libro l, List<Libro> libros) {
+        if(book.getBookPicture()==null) return ;
+        imageRepository.getImage(book.getBookPicture(), new BookRepository.ApiCallback<ResponseBody>() {
+            @Override
+            public void onSuccess(ResponseBody result) {
+                if(result==null)return;
+
+                Bitmap bm = BitmapFactory.decodeStream(result.byteStream());
+                l.setImg(bm);
+                librosLD.setValue(libros);
+
+            }
+
+            @Override
+            public void onFailure(Throwable t) {
+
+            }
+        });
     }
 }
