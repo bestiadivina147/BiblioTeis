@@ -1,5 +1,9 @@
 package com.example.biblioteis.ViewModels;
 
+import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
+import android.util.Log;
+
 import androidx.lifecycle.MutableLiveData;
 import androidx.lifecycle.ViewModel;
 
@@ -16,6 +20,7 @@ import okhttp3.ResponseBody;
 
 public class DetalleVM extends ViewModel {
     public MutableLiveData<LibroDetalle> librosLD= new MutableLiveData<>();
+
     public BookRepository bookRepository = new BookRepository();
     public ImageRepository imageRepository = new ImageRepository();
 
@@ -24,23 +29,8 @@ public class DetalleVM extends ViewModel {
             @Override
             public void onSuccess(Book result) {
                 LibroDetalle libro = BookMapper.book2LibroDetalle(result);
-                imageRepository.getImage(result.getBookPicture(), new BookRepository.ApiCallback<ResponseBody>() {
-                    @Override
-                    public void onSuccess(ResponseBody result) {
-
-                    }
-
-                    @Override
-                    public void onFailure(Throwable t) {
-
-                    }
-                });
-
-
                 librosLD.setValue(libro);
-
-
-
+                obtenLibroImagen(result.getBookPicture(), libro);
             }
 
             @Override
@@ -49,5 +39,28 @@ public class DetalleVM extends ViewModel {
             }
         });
 
+    }
+
+    private void obtenLibroImagen(String urlImg, LibroDetalle libro) {
+        if(urlImg==null){
+            return;
+        }
+        imageRepository.getImage(urlImg, new BookRepository.ApiCallback<ResponseBody>() {
+            @Override
+            public void onSuccess(ResponseBody result) {
+                if (result == null){
+                    return;
+                }
+                Bitmap bm = BitmapFactory.decodeStream(result.byteStream());
+                libro.setImg(bm);
+                librosLD.postValue(libro);
+            }
+
+            @Override
+            public void onFailure(Throwable t) {
+                //TODO
+                Log.e("LibreriaVM", "Error load books", t);
+            }
+        });
     }
 }

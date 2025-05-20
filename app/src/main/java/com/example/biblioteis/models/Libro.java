@@ -1,8 +1,7 @@
 package com.example.biblioteis.models;
 
-import com.example.biblioteis.API.models.Book;
+import android.graphics.Bitmap;
 
-import java.sql.Date;
 
 public class Libro {
     private Integer id;
@@ -11,14 +10,28 @@ public class Libro {
     private String fechaPublicacion;
     private String isbn;
     private String imagen;
+    private Bitmap img;
 
     public Libro(Integer id, String titulo, String autor, String fechaPublicacion, String isbn, String imagen) {
+        this(id,titulo,autor,fechaPublicacion,isbn,imagen,null);
+    }
+
+    public Libro(Integer id, String titulo, String autor, String fechaPublicacion, String isbn, String imagen, Bitmap img) {
         this.id = id;
         this.titulo = titulo;
         this.autor = autor;
         this.fechaPublicacion = fechaPublicacion;
         this.isbn = isbn;
         this.imagen = imagen;
+        this.img = img;
+    }
+
+    public Bitmap getImg() {
+        return img;
+    }
+
+    public void setImg(Bitmap img) {
+        this.img = img;
     }
 
     public Integer getId() {

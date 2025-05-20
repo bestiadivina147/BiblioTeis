@@ -13,23 +13,20 @@ public class BookMapper {
 
     }
 
-    public static LibroDetalle book2LibroDetalle(Book book){
+    public static LibroDetalle book2LibroDetalle(Book book) {
         BookLending bookLendingOwner = null;
 
-        for (BookLending l: book.getBookLendings()) {
-            if(l.getReturnDate() == null){
+        for (BookLending l : book.getBookLendings()) {
+            if (l.getReturnDate() == null) {
                 bookLendingOwner = l;
                 break;
             }
         }
-        
-//        if(bookLendingOwner == null){
-//            
-//            //Libro no encontrado
-//        }
-        
-        
-        
-        return new LibroDetalle(book.getBookPicture(),book.getTitle(), book.getAuthor(),book.getPublishedDate(),book.getIsbn(),book.isAvailable(),book.getBookLendings().size(),bookLendingOwner.getUserId());
+
+        int uid = bookLendingOwner != null ? bookLendingOwner.getUserId() : -1;
+        //Libro no encontrado
+        return new LibroDetalle(book.getBookPicture(), book.getTitle(), book.getAuthor(), book.getPublishedDate(), book.getIsbn(), book.isAvailable(), book.getBookLendings().size(), uid);
+
+
     }
 }

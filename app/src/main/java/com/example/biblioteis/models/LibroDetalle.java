@@ -13,6 +13,8 @@ public class LibroDetalle {
     private int user;
     private Bitmap img;
 
+
+
     public Bitmap getImg() {
         return img;
     }
@@ -100,4 +102,5 @@ public class LibroDetalle {
         this.user = user;
         this.img = img;
     }
+
 }

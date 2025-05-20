@@ -49,6 +49,7 @@ public class LibroActivity extends AppCompatActivity {
         txtNoDisponible = findViewById(R.id.txtNoDisponible);
         btnPrestar = findViewById(R.id.btnPrestar);
         btnDevolver = findViewById(R.id.btnDevolver);
+        img = findViewById(R.id.imgDetalle);
         //OBTENER VM
         vm = new ViewModelProvider(this).get(DetalleVM.class);
         //OBSERVAR VM
@@ -59,6 +60,11 @@ public class LibroActivity extends AppCompatActivity {
             etISBN.setText(libro.getIsbn());
             etPrestamos.setText(libro.getPrestamos() + "");
 
+            if(libro.getImg()!=null){
+                img.setImageBitmap(libro.getImg());
+            }else{
+                img.setImageResource(R.drawable.icono);
+            }
 
             if(libro.getEstado()){
                 etEstado.setText("Disponible");
