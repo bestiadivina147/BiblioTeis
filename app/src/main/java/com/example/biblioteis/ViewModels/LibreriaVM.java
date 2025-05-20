@@ -21,9 +21,9 @@ import okhttp3.ResponseBody;
 
 public class LibreriaVM extends ViewModel {
 
-    public MutableLiveData<List<Libro>> librosLD= new MutableLiveData<>();
+    public final MutableLiveData<List<Libro>> librosLD= new MutableLiveData<>();
     public BookRepository bookRepository ;
-    public ImageRepository imageRepository;
+    public ImageRepository imageRepository= new ImageRepository();
 
 
     public LibreriaVM() {
@@ -67,15 +67,21 @@ public class LibreriaVM extends ViewModel {
 
         bookRepository.getBooks(new BookRepository.ApiCallback<List<Book>>() {
             @Override
-            public void onSuccess(List<Book> result) {
+            public void onSuccess(List<Book> books) {
                 List<Libro> libros = new ArrayList<>();
-                for (Book book : result ){
+                for (Book book : books ){
+                    Libro l = BookMapper.book2Libro(book);
+                    libros.add(l);
+
                     if(book.getBookPicture()==null)return;
                     imageRepository.getImage(book.getBookPicture(), new BookRepository.ApiCallback<ResponseBody>() {
                         @Override
                         public void onSuccess(ResponseBody result) {
                             if(result==null)return;
+
                             Bitmap bm = BitmapFactory.decodeStream(result.byteStream());
+                            l.setImg(bm);
+                            librosLD.setValue(libros);
 
                         }
 
@@ -85,7 +91,7 @@ public class LibreriaVM extends ViewModel {
                         }
                     });
 
-                    libros.add(BookMapper.book2Libro(book));
+
                 }
                 librosLD.setValue(libros);
             }
