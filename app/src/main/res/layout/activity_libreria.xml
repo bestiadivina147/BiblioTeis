@@ -40,7 +40,7 @@
 
             <EditText
                 android:id="@+id/etfiltroautor"
-                android:layout_width="106dp"
+                android:layout_width="300dp"
                 android:layout_height="wrap_content"
                 android:text=""
                 android:textSize="20sp"
@@ -61,7 +61,7 @@
 
             <EditText
                 android:id="@+id/etfiltrotitulo"
-                android:layout_width="106dp"
+                android:layout_width="300dp"
                 android:layout_height="wrap_content"
                 android:text=""
                 android:textSize="20sp"
