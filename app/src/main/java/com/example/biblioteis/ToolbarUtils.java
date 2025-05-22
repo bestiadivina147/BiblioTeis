@@ -1,6 +1,9 @@
 package com.example.biblioteis;
 
+import static android.content.Context.MODE_PRIVATE;
+
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
@@ -47,6 +50,9 @@ public class ToolbarUtils {
             @Override
             public boolean onMenuItemSelected(@NonNull MenuItem menuItem) {
                 if (menuItem.getItemId() == R.id.cerrar_sesion) {
+                    borrarPreferencias(activity);
+
+                    // Redirigir al usuario a la pantalla de login
                     activity.startActivity(new Intent(activity, LogingActivity.class)
                             .setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK));
                     return true;
@@ -69,7 +75,15 @@ public class ToolbarUtils {
                 }
                 return false;
             }
+
         });
+    }
+    private static void borrarPreferencias(AppCompatActivity activity) {
+        // Borrar usuario y contraseña de SharedPreferences
+        SharedPreferences sharedPreferences = activity.getSharedPreferences("MisPreferencias", MODE_PRIVATE);
+        SharedPreferences.Editor editor = sharedPreferences.edit();
+        editor.clear(); // Elimina todos los valores guardados
+        editor.apply();
     }
 }
 
