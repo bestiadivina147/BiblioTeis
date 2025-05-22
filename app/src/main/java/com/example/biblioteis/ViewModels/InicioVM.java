@@ -12,71 +12,41 @@ import com.example.biblioteis.API.repository.BookRepository;
 import com.example.biblioteis.API.repository.ImageRepository;
 import com.example.biblioteis.mapper.BookMapper;
 import com.example.biblioteis.models.Libro;
-import com.example.biblioteis.models.LibroDetalle;
 
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.List;
 
 import okhttp3.ResponseBody;
 
-public class LibreriaVM extends ViewModel {
-
+public class InicioVM extends ViewModel {
     public final MutableLiveData<List<Libro>> librosLD= new MutableLiveData<>();
     public BookRepository bookRepository ;
     public ImageRepository imageRepository= new ImageRepository();
 
-
-    public LibreriaVM() {
+    public InicioVM() {
         this.bookRepository = new BookRepository();
     }
 
-    public void filtrar(String autorFilter, String tituloFilter) {
-        bookRepository.getBooks(new BookRepository.ApiCallback<List<Book>>() {
-            @Override
-            public void onSuccess(List<Book> result) {
-                List<Libro> libros = new ArrayList<>();
-                for (Book book : result ){
-                    //Precondiciones
-                    //Si se filtra por autor y el autor coincide exactamente
-                    if(autorFilter != null && !autorFilter.equals("") && !autorFilter.equals(book.getAuthor())){
-                        continue;
-                    }
-                    if(tituloFilter != null && !tituloFilter.equals("") && !tituloFilter.equals(book.getTitle())){
-                        continue;
-                    }
-
-                    //Cuerpo objeto
-
-                    Libro l = BookMapper.book2Libro(book);
-                    obtenerImagen(book, l, libros);
-                    libros.add(l);
-
-                    //Post condiciones
-                }
-                librosLD.setValue(libros);
-            }
-
-            @Override
-            public void onFailure(Throwable t) {
-
-            }
-        });
-
-
-    }
-
     public void loadLibros() {
-
-
         bookRepository.getBooks(new BookRepository.ApiCallback<List<Book>>() {
             @Override
             public void onSuccess(List<Book> books) {
                 List<Libro> libros = new ArrayList<>();
-                for (Book book : books ){
-                    Libro l = BookMapper.book2Libro(book);
-                    libros.add(l);
-                    obtenerImagen(book, l, libros);
+
+                // Verificar que la lista no esté vacía
+                if (books != null && !books.isEmpty()) {
+                    Collections.shuffle(books); // Mezclar la lista aleatoriamente
+
+                    // Seleccionar los primeros tres libros (o menos si hay menos de tres)
+                    int cantidadLibros = Math.min(3, books.size());
+                    for (int i = 0; i < cantidadLibros; i++) {
+                        Libro l = BookMapper.book2Libro(books.get(i));
+                        libros.add(l);
+                        obtenerImagen(books.get(i), l, libros);
+                    }
                 }
+
                 librosLD.setValue(libros);
             }
 
@@ -85,7 +55,6 @@ public class LibreriaVM extends ViewModel {
                 Log.e("LibreriaVM", "Error load books", t);
             }
         });
-
     }
 
     private void obtenerImagen(Book book, Libro l, List<Libro> libros) {
@@ -107,4 +76,5 @@ public class LibreriaVM extends ViewModel {
             }
         });
     }
+
 }
