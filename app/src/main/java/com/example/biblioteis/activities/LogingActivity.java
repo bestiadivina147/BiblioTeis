@@ -18,13 +18,15 @@ import androidx.lifecycle.ViewModelProvider;
 
 import com.example.biblioteis.R;
 import com.example.biblioteis.ViewModels.LogingVM;
+import com.example.biblioteis.utils.IPreferenciasUsuario;
+import com.example.biblioteis.utils.PreferenciasUsuario;
 
 public class LogingActivity extends AppCompatActivity {
     private EditText usuarioET, contrasenhaET;
     private Button btnLogin;
     private TextView errorTV;
     private LogingVM vm;
-    private SharedPreferences sharedPreferences;
+    private IPreferenciasUsuario prefs ;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -36,22 +38,13 @@ public class LogingActivity extends AppCompatActivity {
             v.setPadding(systemBars.left, systemBars.top, systemBars.right, systemBars.bottom);
             return insets;
         });
-
+        prefs = new PreferenciasUsuario(this);
         usuarioET = findViewById(R.id.etEmail);
         contrasenhaET = findViewById(R.id.etContra);
         errorTV = findViewById(R.id.txtLoginError);
         btnLogin = findViewById(R.id.btnLogin);
         vm = new ViewModelProvider(this).get(LogingVM.class);
 
-        sharedPreferences = getSharedPreferences("MisPreferencias", MODE_PRIVATE);
-
-        // Recuperar usuario y contraseña guardados
-        String usuarioGuardado = sharedPreferences.getString("usuario", "");
-        String contrasenhaGuardada = sharedPreferences.getString("contrasenha", "");
-
-        if (!usuarioGuardado.isEmpty() && !contrasenhaGuardada.isEmpty()) {
-            vm.loging(usuarioGuardado,contrasenhaGuardada);
-        }
 
         vm.logingLD.observe(this, (logingData) -> {
             if (logingData.getMensaje() != null) {
@@ -63,10 +56,7 @@ public class LogingActivity extends AppCompatActivity {
                 Toast.makeText(LogingActivity.this, "Login correcto", Toast.LENGTH_SHORT).show();
 
                 // Guardar usuario y contraseña en SharedPreferences
-                SharedPreferences.Editor editor = sharedPreferences.edit();
-                editor.putString("usuario", usuarioET.getText().toString());
-                editor.putString("contrasenha", contrasenhaET.getText().toString());
-                editor.apply();
+                prefs.guardarLoging(logingData);
                 Intent intent = new Intent(LogingActivity.this, InicioActivity.class);
                 startActivity(intent);
             }

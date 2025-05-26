@@ -9,23 +9,22 @@ import androidx.core.view.ViewCompat;
 import androidx.core.view.WindowInsetsCompat;
 
 import com.example.biblioteis.R;
+import com.example.biblioteis.utils.IPreferenciasUsuario;
+import com.example.biblioteis.utils.PreferenciasUsuario;
 
 public class MainActivity extends AppCompatActivity {
+
+    private IPreferenciasUsuario prefs ;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        startActivity(new Intent(this, LogingActivity.class));
-        EdgeToEdge.enable(this);
-        setContentView(R.layout.activity_main);
-        ViewCompat.setOnApplyWindowInsetsListener(findViewById(R.id.main), (v, insets) -> {
-            Insets systemBars = insets.getInsets(WindowInsetsCompat.Type.systemBars());
-            v.setPadding(systemBars.left, systemBars.top, systemBars.right, systemBars.bottom);
-            return insets;
-        });
+        prefs = new PreferenciasUsuario(this);
+        if(prefs.leer()!=-1){
+            startActivity(new Intent(this, InicioActivity.class));
+        }
+        else{
+            startActivity(new Intent(this, LogingActivity.class));
+        }
     }
-
-
-
-
 }

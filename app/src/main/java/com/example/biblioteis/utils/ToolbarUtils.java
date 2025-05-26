@@ -1,4 +1,4 @@
-package com.example.biblioteis;
+package com.example.biblioteis.utils;
 
 import static android.content.Context.MODE_PRIVATE;
 
@@ -12,6 +12,7 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
 import androidx.core.view.MenuProvider;
 
+import com.example.biblioteis.R;
 import com.example.biblioteis.activities.InicioActivity;
 import com.example.biblioteis.activities.LibreriaActivity;
 import com.example.biblioteis.activities.LibroActivity;
@@ -20,10 +21,13 @@ import com.example.biblioteis.activities.UsuarioActivity;
 
 public class ToolbarUtils {
 
+
     public static void setupToolbar(AppCompatActivity activity) {
         Toolbar toolbar = activity.findViewById(R.id.libroToolbar);
         toolbar.setNavigationIcon(R.drawable.icono);
         activity.setSupportActionBar(toolbar);
+
+        IPreferenciasUsuario prefs = new PreferenciasUsuario(activity);
         activity.addMenuProvider(new MenuProvider() {
             @Override
             public void onCreateMenu(@NonNull Menu menu, @NonNull MenuInflater menuInflater) {
@@ -50,7 +54,7 @@ public class ToolbarUtils {
             @Override
             public boolean onMenuItemSelected(@NonNull MenuItem menuItem) {
                 if (menuItem.getItemId() == R.id.cerrar_sesion) {
-                    borrarPreferencias(activity);
+                    prefs.borrar();
 
                     // Redirigir al usuario a la pantalla de login
                     activity.startActivity(new Intent(activity, LogingActivity.class)
@@ -78,12 +82,6 @@ public class ToolbarUtils {
 
         });
     }
-    private static void borrarPreferencias(AppCompatActivity activity) {
-        // Borrar usuario y contraseña de SharedPreferences
-        SharedPreferences sharedPreferences = activity.getSharedPreferences("MisPreferencias", MODE_PRIVATE);
-        SharedPreferences.Editor editor = sharedPreferences.edit();
-        editor.clear(); // Elimina todos los valores guardados
-        editor.apply();
-    }
+
 }
 

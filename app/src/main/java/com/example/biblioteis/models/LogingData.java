@@ -1,17 +1,21 @@
 package com.example.biblioteis.models;
 
 public class LogingData {
+    private int id;
     private String usuario;
     private String contrasenha;
     private String mensaje;
 
-    public LogingData(String usuario, String contrasenha, String mensaje) {
+    public LogingData(int id, String usuario, String contrasenha, String mensaje) {
+        this.id = id;
         this.usuario = usuario;
         this.contrasenha = contrasenha;
         this.mensaje = mensaje;
     }
 
-    public LogingData(String usuario, String contrasenha) {
+
+    public LogingData(int id,String usuario, String contrasenha) {
+        this.id=id;
         this.usuario = usuario;
         this.contrasenha = contrasenha;
     }
@@ -20,12 +24,12 @@ public class LogingData {
         this.mensaje = msgError;
     }
 
-    public String getContrasenha() {
-        return contrasenha;
+    public int getId() {
+        return id;
     }
 
-    public void setContrasenha(String contrasenha) {
-        this.contrasenha = contrasenha;
+    public void setId(int id) {
+        this.id = id;
     }
 
     public String getUsuario() {
@@ -36,6 +40,14 @@ public class LogingData {
         this.usuario = usuario;
     }
 
+    public String getContrasenha() {
+        return contrasenha;
+    }
+
+    public void setContrasenha(String contrasenha) {
+        this.contrasenha = contrasenha;
+    }
+
     public String getMensaje() {
         return mensaje;
     }
@@ -43,4 +55,6 @@ public class LogingData {
     public void setMensaje(String mensaje) {
         this.mensaje = mensaje;
     }
+
+
 }

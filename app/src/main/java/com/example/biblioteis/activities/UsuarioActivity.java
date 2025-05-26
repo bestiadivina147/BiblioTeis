@@ -8,7 +8,7 @@ import androidx.core.view.ViewCompat;
 import androidx.core.view.WindowInsetsCompat;
 
 import com.example.biblioteis.R;
-import com.example.biblioteis.ToolbarUtils;
+import com.example.biblioteis.utils.ToolbarUtils;
 
 public class UsuarioActivity extends AppCompatActivity {
 

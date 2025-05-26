@@ -12,13 +12,10 @@ import androidx.core.graphics.Insets;
 import androidx.core.view.ViewCompat;
 import androidx.core.view.WindowInsetsCompat;
 import androidx.lifecycle.ViewModelProvider;
-import androidx.recyclerview.widget.LinearLayoutManager;
 
 import com.example.biblioteis.R;
-import com.example.biblioteis.ToolbarUtils;
+import com.example.biblioteis.utils.ToolbarUtils;
 import com.example.biblioteis.ViewModels.DetalleVM;
-import com.example.biblioteis.ViewModels.LibreriaVM;
-import com.example.biblioteis.models.LibroDetalle;
 
 public class LibroActivity extends AppCompatActivity {
     protected static final String BOOK_ID = "bookId";

@@ -21,9 +21,8 @@ import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.biblioteis.R;
-import com.example.biblioteis.ToolbarUtils;
+import com.example.biblioteis.utils.ToolbarUtils;
 import com.example.biblioteis.ViewModels.InicioVM;
-import com.example.biblioteis.ViewModels.LibreriaVM;
 import com.example.biblioteis.models.Libro;
 
 public class InicioActivity extends AppCompatActivity {
