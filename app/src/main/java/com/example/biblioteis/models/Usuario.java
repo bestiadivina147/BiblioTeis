@@ -1,11 +1,15 @@
 package com.example.biblioteis.models;
 
+import java.util.List;
+
 public class Usuario {
 
     private int id;
     private String nombre;
     private String correo;
     private String fecha;
+    private List<LibroLending> libros;
+
 
     public int getId() {
         return id;
@@ -39,12 +43,19 @@ public class Usuario {
         this.fecha = fecha;
     }
 
-    public Usuario(int id,String nombre, String correo, String fecha) {
-        this.id=id;
+    public List<LibroLending> getLibros() {
+        return libros;
+    }
+
+    public void setLibros(List<LibroLending> libros) {
+        this.libros = libros;
+    }
+
+    public Usuario(int id, String nombre, String correo, String fecha, List<LibroLending> libros) {
+        this.id = id;
         this.nombre = nombre;
         this.correo = correo;
         this.fecha = fecha;
+        this.libros = libros;
     }
-
-
 }

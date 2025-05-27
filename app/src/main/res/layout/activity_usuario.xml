@@ -7,6 +7,22 @@
     android:layout_height="match_parent"
     tools:context=".activities.UsuarioActivity">
 
+    <TextView
+        android:id="@+id/txtCorreo"
+        android:layout_width="257dp"
+        android:layout_height="wrap_content"
+        android:text=""
+        app:layout_constraintStart_toEndOf="@+id/textView9"
+        app:layout_constraintTop_toTopOf="@+id/textView11" />
+
+    <TextView
+        android:id="@+id/txtFecha"
+        android:layout_width="257dp"
+        android:layout_height="wrap_content"
+        android:text=""
+        app:layout_constraintStart_toEndOf="@+id/textView9"
+        app:layout_constraintTop_toTopOf="@+id/textView12" />
+
     <androidx.appcompat.widget.Toolbar
         android:id="@+id/libroToolbar"
         android:layout_width="0dp"
@@ -26,6 +42,15 @@
         android:text="Nombre:"
         app:layout_constraintEnd_toEndOf="@+id/textView11"
         app:layout_constraintTop_toBottomOf="@+id/libroToolbar" />
+
+
+    <TextView
+        android:id="@+id/txtNombre"
+        android:layout_width="257dp"
+        android:layout_height="wrap_content"
+        android:text=""
+        app:layout_constraintStart_toEndOf="@+id/textView9"
+        app:layout_constraintTop_toTopOf="@+id/textView9" />
 
     <TextView
         android:id="@+id/textView11"
@@ -63,8 +88,10 @@
         android:layout_marginTop="20dp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/textView13" />
+        app:layout_constraintTop_toBottomOf="@+id/textView13"
+        app:layout_constraintVertical_bias="0.0" />
 
 
 </androidx.constraintlayout.widget.ConstraintLayout>

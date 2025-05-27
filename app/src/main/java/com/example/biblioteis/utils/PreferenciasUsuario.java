@@ -7,7 +7,6 @@ import android.content.SharedPreferences;
 import android.util.Log;
 
 import com.example.biblioteis.models.LogingData;
-import com.example.biblioteis.models.Usuario;
 
 public class PreferenciasUsuario implements IPreferenciasUsuario {
 

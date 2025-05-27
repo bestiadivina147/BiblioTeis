@@ -38,10 +38,10 @@ public class LibreriaVM extends ViewModel {
                 for (Book book : result ){
                     //Precondiciones
                     //Si se filtra por autor y el autor coincide exactamente
-                    if(autorFilter != null && !autorFilter.equals("") && !autorFilter.equals(book.getAuthor())){
+                    if(autorFilter != null && !autorFilter.equals("") && !book.getAuthor().contains(autorFilter)){
                         continue;
                     }
-                    if(tituloFilter != null && !tituloFilter.equals("") && !tituloFilter.equals(book.getTitle())){
+                    if(tituloFilter != null && !tituloFilter.equals("") && !book.getTitle().equals(tituloFilter)){
                         continue;
                     }
 

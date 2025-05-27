@@ -1,16 +1,27 @@
 package com.example.biblioteis.activities;
 
 import android.os.Bundle;
+import android.widget.TextView;
+
 import androidx.activity.EdgeToEdge;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.core.graphics.Insets;
 import androidx.core.view.ViewCompat;
 import androidx.core.view.WindowInsetsCompat;
+import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.biblioteis.R;
+import com.example.biblioteis.ViewModels.UsuarioVM;
+import com.example.biblioteis.utils.IPreferenciasUsuario;
 import com.example.biblioteis.utils.ToolbarUtils;
 
 public class UsuarioActivity extends AppCompatActivity {
+
+    private TextView txtNombre,txtCorreo,txtFecha;
+    private RecyclerView rv;
+    private UsuarioVM vm;
+
+    private IPreferenciasUsuario prefs ;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {

@@ -4,6 +4,7 @@ import com.example.biblioteis.API.models.Book;
 import com.example.biblioteis.API.models.BookLending;
 import com.example.biblioteis.models.Libro;
 import com.example.biblioteis.models.LibroDetalle;
+import com.example.biblioteis.models.LibroLending;
 
 public class BookMapper {
 
@@ -11,6 +12,10 @@ public class BookMapper {
 
         return new Libro(book.getId(),book.getTitle(),book.getAuthor(),book.getPublishedDate(),book.getIsbn(),book.getBookPicture());
 
+    }
+
+    public static LibroLending booklending2LibroLending (BookLending lending){
+        return new LibroLending(lending.getId(),lending.getBookId(),lending.getUserId(),lending.getLendDate(),lending.getReturnDate());
     }
 
     public static LibroDetalle book2LibroDetalle(Book book) {
