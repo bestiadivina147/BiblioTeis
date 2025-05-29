@@ -11,6 +11,7 @@
         android:id="@+id/txtCorreo"
         android:layout_width="257dp"
         android:layout_height="wrap_content"
+        android:layout_marginStart="10dp"
         android:text=""
         app:layout_constraintStart_toEndOf="@+id/textView9"
         app:layout_constraintTop_toTopOf="@+id/textView11" />
@@ -19,6 +20,7 @@
         android:id="@+id/txtFecha"
         android:layout_width="257dp"
         android:layout_height="wrap_content"
+        android:layout_marginStart="10dp"
         android:text=""
         app:layout_constraintStart_toEndOf="@+id/textView9"
         app:layout_constraintTop_toTopOf="@+id/textView12" />
@@ -48,6 +50,7 @@
         android:id="@+id/txtNombre"
         android:layout_width="257dp"
         android:layout_height="wrap_content"
+        android:layout_marginStart="10dp"
         android:text=""
         app:layout_constraintStart_toEndOf="@+id/textView9"
         app:layout_constraintTop_toTopOf="@+id/textView9" />
