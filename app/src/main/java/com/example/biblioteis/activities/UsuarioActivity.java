@@ -26,9 +26,13 @@ import com.example.biblioteis.ViewModels.DetalleVM;
 import com.example.biblioteis.ViewModels.UsuarioVM;
 import com.example.biblioteis.models.Libro;
 import com.example.biblioteis.models.LibroLending;
+import com.example.biblioteis.models.Usuario;
 import com.example.biblioteis.utils.IPreferenciasUsuario;
 import com.example.biblioteis.utils.PreferenciasUsuario;
 import com.example.biblioteis.utils.ToolbarUtils;
+
+import java.util.ArrayList;
+import java.util.List;
 
 public class UsuarioActivity extends AppCompatActivity {
 
@@ -59,6 +63,13 @@ public class UsuarioActivity extends AppCompatActivity {
         vm = new ViewModelProvider(this).get(UsuarioVM.class);
         //OBSERVAR VM
         vm.usuarioLD.observe(this,usuario -> {
+            List <Libro> libros = new ArrayList<>();
+            List <LibroLending> libroLendings = usuario.getLibros();
+
+            for(LibroLending l : libroLendings){
+               int id =  l.getBookId();
+               vm.loadLibro(id);
+            }
 
             txtNombre.setText(usuario.getNombre());
             txtCorreo.setText(usuario.getCorreo());
