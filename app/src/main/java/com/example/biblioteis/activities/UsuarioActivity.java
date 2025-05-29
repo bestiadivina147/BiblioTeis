@@ -59,14 +59,10 @@ public class UsuarioActivity extends AppCompatActivity {
         vm = new ViewModelProvider(this).get(UsuarioVM.class);
         //OBSERVAR VM
         vm.usuarioLD.observe(this,usuario -> {
-            if (usuario != null) {
-                System.out.println("UsuarioActivity" + usuario.getNombre());
-                txtNombre.setText(usuario.getNombre());
-                txtCorreo.setText(usuario.getCorreo());
-                txtFecha.setText(usuario.getFecha());
-            } else {
-                System.out.println("usuarioLD es nulo");
-            }
+
+            txtNombre.setText(usuario.getNombre());
+            txtCorreo.setText(usuario.getCorreo());
+            txtFecha.setText(usuario.getFecha());
 
             rv.setLayoutManager(new LinearLayoutManager(this));
             rv.setLayoutManager(new LinearLayoutManager(this));
