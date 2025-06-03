@@ -15,7 +15,6 @@ import com.example.biblioteis.API.repository.UserRepository;
 import com.example.biblioteis.mapper.BookMapper;
 import com.example.biblioteis.mapper.UserMapper;
 import com.example.biblioteis.models.Libro;
-import com.example.biblioteis.models.LibroDetalle;
 import com.example.biblioteis.models.Usuario;
 
 import okhttp3.ResponseBody;

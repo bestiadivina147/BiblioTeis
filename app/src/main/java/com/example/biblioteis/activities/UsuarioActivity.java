@@ -22,11 +22,10 @@ import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.biblioteis.R;
-import com.example.biblioteis.ViewModels.DetalleVM;
 import com.example.biblioteis.ViewModels.UsuarioVM;
+import com.example.biblioteis.mapper.BookMapper;
 import com.example.biblioteis.models.Libro;
 import com.example.biblioteis.models.LibroLending;
-import com.example.biblioteis.models.Usuario;
 import com.example.biblioteis.utils.IPreferenciasUsuario;
 import com.example.biblioteis.utils.PreferenciasUsuario;
 import com.example.biblioteis.utils.ToolbarUtils;
@@ -39,6 +38,8 @@ public class UsuarioActivity extends AppCompatActivity {
     private TextView txtNombre,txtCorreo,txtFecha;
     private RecyclerView rv;
     private UsuarioVM vm;
+
+
 
     private IPreferenciasUsuario prefs ;
 
@@ -63,19 +64,14 @@ public class UsuarioActivity extends AppCompatActivity {
         vm = new ViewModelProvider(this).get(UsuarioVM.class);
         //OBSERVAR VM
         vm.usuarioLD.observe(this,usuario -> {
-            List <Libro> libros = new ArrayList<>();
             List <LibroLending> libroLendings = usuario.getLibros();
 
-            for(LibroLending l : libroLendings){
-               int id =  l.getBookId();
-               vm.loadLibro(id);
-            }
+
 
             txtNombre.setText(usuario.getNombre());
             txtCorreo.setText(usuario.getCorreo());
             txtFecha.setText(usuario.getFecha());
 
-            rv.setLayoutManager(new LinearLayoutManager(this));
             rv.setLayoutManager(new LinearLayoutManager(this));
             rv.setAdapter(new RecyclerView.Adapter() {
 
@@ -112,12 +108,37 @@ public class UsuarioActivity extends AppCompatActivity {
 
                 @Override
                 public void onBindViewHolder(@NonNull RecyclerView.ViewHolder holder, int position) {
+                    LibroLending libroLending = libroLendings.get(position);
+                    LibroViewHolder lvh = (LibroViewHolder) holder;
 
+                    Libro libro = libroLending.getLibro();
+
+                    lvh.tvAutor.setText(libro.getAutor());
+                    lvh.tvTitulo.setText(libro.getTitulo());
+                    lvh.tvFecha.setText(libro.getFechaPublicacion());
+                    lvh.tvDisponibles.setText(0 + "");
+                    lvh.tvTotales.setText(0 + "");
+                    if(libro.getImg()!=null){
+                        lvh.imgLibro.setImageBitmap(libro.getImg());
+                    }else{
+                        lvh.imgLibro.setImageResource(R.drawable.icono);
+                    }
+
+                    lvh.btnVerMas.setOnClickListener(l->{
+                        Intent intent = new Intent(UsuarioActivity.this, LibroActivity.class);
+                        intent.putExtra(LibroActivity.BOOK_ID, libro.getId());
+                        startActivity(intent);
+                    });
+                    lvh.cl.setOnClickListener(l->{
+                        Intent intent = new Intent(UsuarioActivity.this, LibroActivity.class);
+                        intent.putExtra(LibroActivity.BOOK_ID, libro.getId());
+                        startActivity(intent);
+                    });
                 }
 
                 @Override
                 public int getItemCount() {
-                    return 0;
+                    return libroLendings.size();
                 }
             });
         });

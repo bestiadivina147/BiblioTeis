@@ -42,7 +42,6 @@ public class LogingVM extends ViewModel {
                 logingLD.setValue(ld);
             }
 
-
         });
 
     }

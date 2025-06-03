@@ -15,7 +15,8 @@ public class BookMapper {
     }
 
     public static LibroLending booklending2LibroLending (BookLending lending){
-        return new LibroLending(lending.getId(),lending.getBookId(),lending.getUserId(),lending.getLendDate(),lending.getReturnDate());
+        Libro l = book2Libro(lending.getBook());
+        return new LibroLending(lending.getId(),lending.getBookId(), l , lending.getUserId(),lending.getLendDate(),lending.getReturnDate());
     }
 
     public static LibroDetalle book2LibroDetalle(Book book) {
