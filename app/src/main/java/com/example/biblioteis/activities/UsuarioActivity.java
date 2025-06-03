@@ -2,7 +2,6 @@ package com.example.biblioteis.activities;
 
 import android.content.Intent;
 import android.os.Bundle;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -23,14 +22,13 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.biblioteis.R;
 import com.example.biblioteis.ViewModels.UsuarioVM;
-import com.example.biblioteis.mapper.BookMapper;
+import com.example.biblioteis.models.EstadosDevolucion;
 import com.example.biblioteis.models.Libro;
 import com.example.biblioteis.models.LibroLending;
 import com.example.biblioteis.utils.IPreferenciasUsuario;
 import com.example.biblioteis.utils.PreferenciasUsuario;
 import com.example.biblioteis.utils.ToolbarUtils;
 
-import java.util.ArrayList;
 import java.util.List;
 
 public class UsuarioActivity extends AppCompatActivity {
@@ -124,6 +122,10 @@ public class UsuarioActivity extends AppCompatActivity {
                         lvh.imgLibro.setImageResource(R.drawable.icono);
                     }
 
+                    //Gestionar elementos visuales en base a su estado de devolucion
+                    gestionarEstadoDevolucion(libroLending);
+
+
                     lvh.btnVerMas.setOnClickListener(l->{
                         Intent intent = new Intent(UsuarioActivity.this, LibroActivity.class);
                         intent.putExtra(LibroActivity.BOOK_ID, libro.getId());
@@ -136,10 +138,20 @@ public class UsuarioActivity extends AppCompatActivity {
                     });
                 }
 
+
+
                 @Override
                 public int getItemCount() {
                     return libroLendings.size();
                 }
+
+
+                private void gestionarEstadoDevolucion(LibroLending libroLending) {
+                    EstadosDevolucion ed = libroLending.getEstadoDevolucion();
+
+
+                }
+
             });
         });
 

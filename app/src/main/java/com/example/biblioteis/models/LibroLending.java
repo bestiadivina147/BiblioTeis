@@ -1,7 +1,17 @@
 package com.example.biblioteis.models;
 
 
+import com.example.biblioteis.utils.DateUtils;
+
+import java.text.ParseException;
+import java.util.Date;
+
+
+
 public class LibroLending {
+
+    protected static final int DIAS = 15;
+
     private int id;
     private int bookId;
     private Libro libro;
@@ -9,6 +19,17 @@ public class LibroLending {
     private String lendDate;
     private String returnDate;
 
+    public LibroLending() {
+    }
+
+    public LibroLending(int id, int bookId, Libro libro, int userId, String lendDate, String returnDate) {
+        this.id = id;
+        this.bookId = bookId;
+        this.libro = libro;
+        this.userId = userId;
+        this.lendDate = lendDate;
+        this.returnDate = returnDate;
+    }
 
     public int getId() {
         return id;
@@ -58,21 +79,28 @@ public class LibroLending {
         this.returnDate = returnDate;
     }
 
-    public LibroLending(int id, int bookId, int userId, String lendDate, String returnDate) {
-        this.id = id;
-        this.bookId = bookId;
-        this.userId = userId;
-        this.lendDate = lendDate;
-        this.returnDate = returnDate;
+    public Date getExpectedReturnDate() {
+        Date lendDate;
+        try {
+            lendDate = DateUtils.String2Date(this.lendDate);
+        } catch (ParseException e) {
+            try {
+                lendDate = DateUtils.String2Date("9999/01/01'T'00:00:00");
+            } catch (ParseException ex) {
+                throw new RuntimeException(ex);
+            }
+        }
+        return DateUtils.sumarDiasAFecha(lendDate, DIAS);
     }
 
-    public LibroLending(int id, int bookId, Libro libro, int userId, String lendDate, String returnDate) {
-        this.id = id;
-        this.bookId = bookId;
-        this.libro = libro;
-        this.userId = userId;
-        this.lendDate = lendDate;
-        this.returnDate = returnDate;
-    }
 
+    public EstadosDevolucion getEstadoDevolucion (){
+        if(returnDate!=null){
+            return  EstadosDevolucion.DEVUELTO;
+        }
+        if(new Date().compareTo(this.getExpectedReturnDate())>=0){
+            return EstadosDevolucion.ENPRESTAMO;
+        }
+        return  EstadosDevolucion.ATRASADO;
+    }
 }

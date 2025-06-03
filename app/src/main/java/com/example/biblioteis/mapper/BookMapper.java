@@ -5,8 +5,13 @@ import com.example.biblioteis.API.models.BookLending;
 import com.example.biblioteis.models.Libro;
 import com.example.biblioteis.models.LibroDetalle;
 import com.example.biblioteis.models.LibroLending;
+import com.example.biblioteis.utils.DateUtils;
+
+import java.text.ParseException;
+import java.util.Date;
 
 public class BookMapper {
+
 
     public static Libro book2Libro(Book book){
 
@@ -16,6 +21,7 @@ public class BookMapper {
 
     public static LibroLending booklending2LibroLending (BookLending lending){
         Libro l = book2Libro(lending.getBook());
+
         return new LibroLending(lending.getId(),lending.getBookId(), l , lending.getUserId(),lending.getLendDate(),lending.getReturnDate());
     }
 
