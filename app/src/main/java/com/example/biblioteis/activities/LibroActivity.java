@@ -14,6 +14,8 @@ import androidx.core.view.WindowInsetsCompat;
 import androidx.lifecycle.ViewModelProvider;
 
 import com.example.biblioteis.R;
+import com.example.biblioteis.utils.IPreferenciasUsuario;
+import com.example.biblioteis.utils.PreferenciasUsuario;
 import com.example.biblioteis.utils.ToolbarUtils;
 import com.example.biblioteis.ViewModels.DetalleVM;
 
@@ -24,6 +26,7 @@ public class LibroActivity extends AppCompatActivity {
     private TextView etTitulo, etAutor, etFecha,etISBN,etEstado,etPrestamos,txtNoDisponible;
     private Button btnPrestar,btnDevolver;
     private DetalleVM vm;
+    private IPreferenciasUsuario prefs;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -36,6 +39,8 @@ public class LibroActivity extends AppCompatActivity {
             v.setPadding(systemBars.left, systemBars.top, systemBars.right, systemBars.bottom);
             return insets;
         });
+
+        prefs = new PreferenciasUsuario(this);
         //VINCULAR ELEMENTOS GRAFICOS
         etTitulo = findViewById(R.id.etTitulo);
         etAutor = findViewById(R.id.etAutor);
@@ -47,6 +52,10 @@ public class LibroActivity extends AppCompatActivity {
         btnPrestar = findViewById(R.id.btnPrestar);
         btnDevolver = findViewById(R.id.btnDevolver);
         img = findViewById(R.id.imgDetalle);
+
+
+
+
         //OBTENER VM
         vm = new ViewModelProvider(this).get(DetalleVM.class);
         //OBSERVAR VM
@@ -56,6 +65,23 @@ public class LibroActivity extends AppCompatActivity {
             etFecha.setText(libro.getFecha());
             etISBN.setText(libro.getIsbn());
             etPrestamos.setText(libro.getPrestamos() + "");
+
+            int usuarioActual = prefs.leer();
+            int usuarioLibro = libro.getUser();
+
+            if (usuarioLibro == -1) {
+                btnPrestar.setVisibility(View.VISIBLE);
+                btnDevolver.setVisibility(View.GONE);
+                txtNoDisponible.setVisibility(View.GONE);
+            } else if (usuarioLibro == usuarioActual) {
+                btnPrestar.setVisibility(View.GONE);
+                btnDevolver.setVisibility(View.VISIBLE);
+                txtNoDisponible.setVisibility(View.GONE);
+            } else {
+                btnPrestar.setVisibility(View.GONE);
+                btnDevolver.setVisibility(View.GONE);
+                txtNoDisponible.setVisibility(View.VISIBLE);
+            }
 
             if(libro.getImg()!=null){
                 img.setImageBitmap(libro.getImg());
@@ -70,6 +96,7 @@ public class LibroActivity extends AppCompatActivity {
             if(!libro.getEstado()){
                 etEstado.setText("No Disponible");
             }
+
         });
         //VINCULAR ACCIONES
         int id = getIntent().getExtras().getInt(BOOK_ID);

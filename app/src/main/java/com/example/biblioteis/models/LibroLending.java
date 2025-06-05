@@ -93,17 +93,6 @@ public class LibroLending {
         return DateUtils.sumarDiasAFecha(lendDate, DIAS);
     }
 
-
-//    public EstadosDevolucion getEstadoDevolucion (){
-//        if(returnDate!=null){
-//            return  EstadosDevolucion.DEVUELTO;
-//        }
-//        if(new Date().compareTo(this.getExpectedReturnDate())>=0){
-//            return EstadosDevolucion.ENPRESTAMO;
-//        }
-//        return  EstadosDevolucion.ATRASADO;
-//    }
-
     public EstadosDevolucion getEstadoDevolucion() {
         if (returnDate != null) {
             return EstadosDevolucion.DEVUELTO; // Si hay fecha de devolución, el libro fue devuelto.

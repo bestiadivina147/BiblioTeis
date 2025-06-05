@@ -8,6 +8,8 @@ import androidx.lifecycle.MutableLiveData;
 import androidx.lifecycle.ViewModel;
 
 import com.example.biblioteis.API.models.Book;
+import com.example.biblioteis.API.models.BookLending;
+import com.example.biblioteis.API.repository.BookLendingRepository;
 import com.example.biblioteis.API.repository.BookRepository;
 import com.example.biblioteis.API.repository.ImageRepository;
 import com.example.biblioteis.mapper.BookMapper;
@@ -23,6 +25,7 @@ public class DetalleVM extends ViewModel {
 
     public BookRepository bookRepository = new BookRepository();
     public ImageRepository imageRepository = new ImageRepository();
+    public BookLendingRepository bookLendingRepository = new BookLendingRepository();
 
     public void load(int id) {
         bookRepository.getBookById(id, new BookRepository.ApiCallback<Book>() {

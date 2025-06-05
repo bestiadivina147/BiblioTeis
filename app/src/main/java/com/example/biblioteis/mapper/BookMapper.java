@@ -39,6 +39,6 @@ public class BookMapper {
         //Libro no encontrado
         return new LibroDetalle(book.getBookPicture(), book.getTitle(), book.getAuthor(), book.getPublishedDate(), book.getIsbn(), book.isAvailable(), book.getBookLendings().size(), uid);
 
-
     }
+
 }
