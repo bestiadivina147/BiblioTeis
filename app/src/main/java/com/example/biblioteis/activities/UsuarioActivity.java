@@ -1,5 +1,7 @@
 package com.example.biblioteis.activities;
 
+import android.annotation.SuppressLint;
+import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.LayoutInflater;
@@ -13,6 +15,7 @@ import androidx.activity.EdgeToEdge;
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.constraintlayout.widget.ConstraintLayout;
+import androidx.core.content.ContextCompat;
 import androidx.core.graphics.Insets;
 import androidx.core.view.ViewCompat;
 import androidx.core.view.WindowInsetsCompat;
@@ -77,7 +80,7 @@ public class UsuarioActivity extends AppCompatActivity {
 
                     public TextView tvAutor, tvTitulo, tvFecha, tvDisponibles, tvTotales;
                     public ImageView imgLibro;
-                    public Button btnVerMas;
+                    public Button btnVerMas,btndispo;
 
                     public ConstraintLayout cl;
 
@@ -93,13 +96,14 @@ public class UsuarioActivity extends AppCompatActivity {
                         imgLibro = iv.findViewById(R.id.imgFrLibro);
                         cl = iv.findViewById(R.id.libroConstraint);
                         btnVerMas = iv.findViewById(R.id.btnVerMas);
+                        btndispo = iv.findViewById(R.id.btndispo);
                     }
                 }
 
                 @NonNull
                 @Override
                 public RecyclerView.ViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
-                    View view = LayoutInflater.from(parent.getContext()).inflate(R.layout.fragment_libro, parent, false);
+                    View view = LayoutInflater.from(parent.getContext()).inflate(R.layout.fragment_librouser, parent, false);
 
                     return new LibroViewHolder(view);
                 }
@@ -114,7 +118,6 @@ public class UsuarioActivity extends AppCompatActivity {
                     lvh.tvAutor.setText(libro.getAutor());
                     lvh.tvTitulo.setText(libro.getTitulo());
                     lvh.tvFecha.setText(libro.getFechaPublicacion());
-                    lvh.tvDisponibles.setText(0 + "");
                     lvh.tvTotales.setText(0 + "");
                     if(libro.getImg()!=null){
                         lvh.imgLibro.setImageBitmap(libro.getImg());
@@ -123,7 +126,7 @@ public class UsuarioActivity extends AppCompatActivity {
                     }
 
                     //Gestionar elementos visuales en base a su estado de devolucion
-                    gestionarEstadoDevolucion(libroLending);
+                    gestionarEstadoDevolucion(libroLending,lvh);
 
 
                     lvh.btnVerMas.setOnClickListener(l->{
@@ -146,11 +149,41 @@ public class UsuarioActivity extends AppCompatActivity {
                 }
 
 
-                private void gestionarEstadoDevolucion(LibroLending libroLending) {
+                private void gestionarEstadoDevolucion(LibroLending libroLending, LibroViewHolder lvh) {
                     EstadosDevolucion ed = libroLending.getEstadoDevolucion();
 
+                    // Obtener contexto desde la vista del ViewHolder
+                    Context context = lvh.itemView.getContext();
 
+                    // Obtener el color correcto desde colors.xml
+                    int color;
+                    switch (ed) {
+                        case DEVUELTO:
+                            color = ContextCompat.getColor(context, R.color.succes); // Verde para libros devueltos
+                            lvh.btndispo.setText("Devuelto");
+                            break;
+
+                        case ATRASADO:
+                            color = ContextCompat.getColor(context, R.color.danger); // Rojo para libros atrasados
+                            lvh.btndispo.setText("Atrasado");
+                            break;
+
+                        case ENPRESTAMO:
+                            color = ContextCompat.getColor(context, R.color.warning); // Amarillo para libros en préstamo
+                            lvh.btndispo.setText("En préstamo");
+                            break;
+
+                        default:
+                            color = ContextCompat.getColor(context, R.color.gris); // Gris para estados desconocidos
+                            lvh.btndispo.setText("Desconocido");
+                            break;
+                    }
+
+                    // Aplicar el color de fondo al botón
+                    lvh.btndispo.setBackgroundColor(color);
                 }
+
+
 
             });
         });

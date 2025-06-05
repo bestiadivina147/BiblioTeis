@@ -94,13 +94,27 @@ public class LibroLending {
     }
 
 
-    public EstadosDevolucion getEstadoDevolucion (){
-        if(returnDate!=null){
-            return  EstadosDevolucion.DEVUELTO;
+//    public EstadosDevolucion getEstadoDevolucion (){
+//        if(returnDate!=null){
+//            return  EstadosDevolucion.DEVUELTO;
+//        }
+//        if(new Date().compareTo(this.getExpectedReturnDate())>=0){
+//            return EstadosDevolucion.ENPRESTAMO;
+//        }
+//        return  EstadosDevolucion.ATRASADO;
+//    }
+
+    public EstadosDevolucion getEstadoDevolucion() {
+        if (returnDate != null) {
+            return EstadosDevolucion.DEVUELTO; // Si hay fecha de devolución, el libro fue devuelto.
         }
-        if(new Date().compareTo(this.getExpectedReturnDate())>=0){
-            return EstadosDevolucion.ENPRESTAMO;
+
+        // Comparar la fecha actual con la fecha esperada de devolución
+        if (new Date().compareTo(this.getExpectedReturnDate()) > 0) {
+            return EstadosDevolucion.ATRASADO; // Si la fecha actual es mayor que la esperada, está atrasado.
         }
-        return  EstadosDevolucion.ATRASADO;
+
+        return EstadosDevolucion.ENPRESTAMO; // Si no ha sido devuelto y la fecha aún no ha pasado, sigue en préstamo.
     }
+
 }
