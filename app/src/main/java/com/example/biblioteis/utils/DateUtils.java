@@ -39,5 +39,10 @@ public class DateUtils {
         Date finalDate = calendario.getTime();
         return finalDate;
     }
+    public static String getCurrentDate() {
+        SimpleDateFormat formatter = new SimpleDateFormat("yyyy-MM-dd'T'HH:mm:ss");
+        return formatter.format(new Date());
+    }
+
 
 }

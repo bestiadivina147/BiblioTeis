@@ -101,5 +101,13 @@ public class LibroActivity extends AppCompatActivity {
         //VINCULAR ACCIONES
         int id = getIntent().getExtras().getInt(BOOK_ID);
         vm.load(id);
+        btnPrestar.setOnClickListener(v -> {
+            int usuarioId = prefs.leer();
+            int libroId = id;
+
+            vm.prestarLibro(libroId, usuarioId);
+        });
+
+
     }
 }
