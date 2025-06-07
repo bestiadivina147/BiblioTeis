@@ -108,6 +108,13 @@ public class LibroActivity extends AppCompatActivity {
             vm.prestarLibro(libroId, usuarioId);
         });
 
+        btnDevolver.setOnClickListener(v -> {
+            int usuarioId = prefs.leer();
+            int libroId = id;
+
+            vm.devolverLibro(libroId, usuarioId);
+        });
+
 
     }
 }

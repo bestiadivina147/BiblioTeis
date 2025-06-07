@@ -132,6 +132,56 @@ public class DetalleVM extends ViewModel {
     }
 
 
+    public void devolverLibro(int libroId, int usuarioId) {
+        // 1) Validaciones básicas
+        if (libroId < 0 || usuarioId < 0) {
+            Log.e("DetalleVM", "IDs inválidos para devolución (libroId=" + libroId + ", usuarioId=" + usuarioId + ")");
+            return;
+        }
+
+        // 2) Recuperar todos los préstamos para encontrar el activo de este libro y usuario
+        bookLendingRepository.getAllLendings(new BookRepository.ApiCallback<List<BookLending>>() {
+            @Override
+            public void onSuccess(List<BookLending> allLendings) {
+                BookLending activo = null;
+                for (BookLending bl : allLendings) {
+                    if (bl.getBookId() == libroId
+                            && bl.getUserId() == usuarioId
+                            && (bl.getReturnDate() == null || bl.getReturnDate().isEmpty())) {
+                        activo = bl;
+                        break;
+                    }
+                }
+
+                if (activo == null) {
+                    Log.e("DetalleVM", "No se encontró préstamo activo para libro "
+                            + libroId + " y usuario " + usuarioId);
+                    return;
+                }
+
+                int lendingId = activo.getId();
+                // 3) Llamar al repositorio para devolverlo
+                bookLendingRepository.returnBook(lendingId, new BookRepository.ApiCallback<Boolean>() {
+                    @Override
+                    public void onSuccess(Boolean result) {
+                        Log.i("DetalleVM", "returnBook result=" + result);
+                        // Refresca la UI
+                        load(libroId);
+                    }
+                    @Override
+                    public void onFailure(Throwable t) {
+                        Log.e("DetalleVM", "Error al devolver libro", t);
+                    }
+                });
+            }
+            @Override
+            public void onFailure(Throwable t) {
+                Log.e("DetalleVM", "Error al obtener lista de préstamos", t);
+            }
+        });
+    }
+
+
 
 
 }
