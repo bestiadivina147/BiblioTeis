@@ -14,6 +14,7 @@ import androidx.core.view.WindowInsetsCompat;
 import androidx.lifecycle.ViewModelProvider;
 
 import com.example.biblioteis.R;
+import com.example.biblioteis.utils.DateUtils;
 import com.example.biblioteis.utils.IPreferenciasUsuario;
 import com.example.biblioteis.utils.PreferenciasUsuario;
 import com.example.biblioteis.utils.ToolbarUtils;
@@ -60,9 +61,11 @@ public class LibroActivity extends AppCompatActivity {
         vm = new ViewModelProvider(this).get(DetalleVM.class);
         //OBSERVAR VM
         vm.librosLD.observe(this, libro ->{
+            String fechasinformatear = libro.getFecha();
+            String fecha = DateUtils.formatDate(fechasinformatear);
             etTitulo.setText(libro.getTitulo());
             etAutor.setText(libro.getAutor());
-            etFecha.setText(libro.getFecha());
+            etFecha.setText(fecha);
             etISBN.setText(libro.getIsbn());
             etPrestamos.setText(libro.getPrestamos() + "");
 

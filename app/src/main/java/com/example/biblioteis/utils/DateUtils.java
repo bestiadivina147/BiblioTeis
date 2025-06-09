@@ -13,7 +13,7 @@ public class DateUtils {
 
     public static String formatDate(String inputDate) {
         SimpleDateFormat inputFormatter = new SimpleDateFormat("yyyy-MM-dd'T'HH:mm:ss");
-        SimpleDateFormat outputFormatter = new SimpleDateFormat("dd/MM/yyyy HH:mm:ss");
+        SimpleDateFormat outputFormatter = new SimpleDateFormat("yyyy-MM-dd");
 
         try {
             Date date = inputFormatter.parse(inputDate);

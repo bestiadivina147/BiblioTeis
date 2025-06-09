@@ -6,6 +6,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
+import android.widget.DatePicker;
 import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.TextView;
@@ -22,6 +23,7 @@ import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.biblioteis.R;
+import com.example.biblioteis.utils.DateUtils;
 import com.example.biblioteis.utils.ToolbarUtils;
 import com.example.biblioteis.ViewModels.LibreriaVM;
 import com.example.biblioteis.models.Libro;
@@ -68,6 +70,7 @@ public class LibreriaActivity extends AppCompatActivity {
                     public LibroViewHolder(@NonNull View iv) {
                         super(iv);
 
+
                         tvAutor = iv.findViewById(R.id.tvFrAutor);
                         tvTitulo = iv.findViewById(R.id.tvFrTitulo);
                         tvFecha = iv.findViewById(R.id.tvFrFecha);
@@ -92,10 +95,13 @@ public class LibreriaActivity extends AppCompatActivity {
                 public void onBindViewHolder(@NonNull RecyclerView.ViewHolder holder, int position) {
                     Libro libro = libros.get(position);
                     LibroViewHolder lvh = (LibroViewHolder) holder;
+                    String fechasinformatear = libro.getFechaPublicacion();
+                    String fecha = DateUtils.formatDate(fechasinformatear);
+
 
                     lvh.tvAutor.setText(libro.getAutor());
                     lvh.tvTitulo.setText(libro.getTitulo());
-                    lvh.tvFecha.setText(libro.getFechaPublicacion());
+                    lvh.tvFecha.setText(fecha);
                     lvh.tvDisponibles.setText(0 + "");
                     lvh.tvTotales.setText(0 + "");
                     if(libro.getImg()!=null){
