@@ -25,7 +25,7 @@ import java.util.List;
 import okhttp3.ResponseBody;
 
 public class DetalleVM extends ViewModel {
-    public MutableLiveData<LibroDetalle> librosLD= new MutableLiveData<>();
+    public MutableLiveData<LibroDetalle> librosLD = new MutableLiveData<>();
 
     public BookRepository bookRepository = new BookRepository();
     public ImageRepository imageRepository = new ImageRepository();
@@ -50,13 +50,13 @@ public class DetalleVM extends ViewModel {
     }
 
     private void obtenLibroImagen(String urlImg, LibroDetalle libro) {
-        if(urlImg==null){
+        if (urlImg == null) {
             return;
         }
         imageRepository.getImage(urlImg, new BookRepository.ApiCallback<ResponseBody>() {
             @Override
             public void onSuccess(ResponseBody result) {
-                if (result == null){
+                if (result == null) {
                     return;
                 }
                 Bitmap bm = BitmapFactory.decodeStream(result.byteStream());
@@ -78,60 +78,48 @@ public class DetalleVM extends ViewModel {
             return;
         }
 
+
         // Obtener el libro antes de realizar el préstamo
-        bookRepository.getBookById(libroId, new BookRepository.ApiCallback<Book>() {
+
+
+        // Enviar la solicitud de préstamo
+        bookLendingRepository.lendBook(usuarioId, libroId, new BookRepository.ApiCallback<Boolean>() {
             @Override
-            public void onSuccess(Book book) {
-                if (book == null) {
-                    Log.e("DetalleVM", "Error: No se pudo obtener el libro.");
-                    return;
+            public void onSuccess(Boolean result) {
+                if (result) {
+                    Log.i("DetalleVM", "Libro prestado con éxito.");
+                    load(libroId); // Recargar datos del libro para actualizar la UI
+                } else {
+                    Log.e("DetalleVM", "Error al prestar el libro.");
                 }
-
-                // Crear el objeto `BookLending` con el libro asignado
-                BookLending nuevoPrestamo = new BookLending();
-                nuevoPrestamo.setBookId(libroId);
-                nuevoPrestamo.setUserId(usuarioId);
-                nuevoPrestamo.setLendDate(DateUtils.getCurrentDate());
-                try {
-                    Date date = DateUtils.String2Date(nuevoPrestamo.getLendDate());
-                    Date returndate = DateUtils.sumarDiasAFecha(date,15);
-                    nuevoPrestamo.setReturnDate(returndate.toString());
-                } catch (ParseException e) {
-                    throw new RuntimeException(e);
-                }
-                nuevoPrestamo.setBook(book); // Asignar el libro al préstamo
-
-                // Enviar la solicitud de préstamo
-                bookLendingRepository.lendBook(nuevoPrestamo, new BookRepository.ApiCallback<Boolean>() {
-                    @Override
-                    public void onSuccess(Boolean result) {
-                        if (result) {
-                            Log.i("DetalleVM", "Datos del préstamo enviado: " + new Gson().toJson(nuevoPrestamo));
-
-                            Log.i("DetalleVM", "Libro prestado con éxito.");
-                            load(libroId); // Recargar datos del libro para actualizar la UI
-                        } else {
-                            Log.i("DetalleVM", "Datos del préstamo enviado: " + new Gson().toJson(nuevoPrestamo));
-
-                            Log.e("DetalleVM", "Error al prestar el libro.");
-                        }
-                    }
-
-                    @Override
-                    public void onFailure(Throwable t) {
-                        Log.e("DetalleVM", "Fallo al conectar con el servidor para prestar libro", t);
-                    }
-                });
             }
 
             @Override
             public void onFailure(Throwable t) {
-                Log.e("DetalleVM", "Error al obtener el libro para préstamo", t);
+                Log.e("DetalleVM", "Fallo al conectar con el servidor para prestar libro", t);
+            }
+        });
+
+
+    }
+    public void devolverlibro(int idlibro){
+        if (idlibro == -1) {
+            Log.e("DetalleVM", "Error: Usuario o libro inválido para préstamo.");
+            return;
+        }
+        bookLendingRepository.returnBook(idlibro, new BookRepository.ApiCallback<Boolean>() {
+            @Override
+            public void onSuccess(Boolean result) {
+                Log.i("DetalleVM", "Libro devuelto con éxito.");
+                load(idlibro); // Recargar datos del libro para actualizar la UI
+            }
+
+            @Override
+            public void onFailure(Throwable t) {
+                Log.e("DetalleVM", "Error al devolver el libro.");
             }
         });
     }
-
-
 
 
 }

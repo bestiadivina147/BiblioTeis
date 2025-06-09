@@ -26,5 +26,9 @@
         android:id="@+id/cerrar_sesion"
         android:title="@string/cerrar_sesion"
         app:showAsAction="never" />
+    <item
+        android:id="@+id/opcion_qr"
+        android:title="@string/opcion_qr"
+        app:showAsAction="never" />
 
 </menu>

@@ -6,4 +6,5 @@
     <string name="opcion_libreria">Libreria</string>
     <string name="opcion_usuario">Perfil</string>
     <string name="opcion_inicio">Inicio</string>
+    <string name="opcion_qr">QR</string>
 </resources>

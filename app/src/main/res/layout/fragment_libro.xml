@@ -74,18 +74,18 @@
 
             <TextView
                 android:id="@+id/tvFrAutor"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
+                android:layout_width="216dp"
+                android:layout_height="19dp"
                 android:text=""
-                app:layout_constraintStart_toEndOf="@+id/textView16"
+                app:layout_constraintStart_toStartOf="@+id/tvFrTitulo"
                 app:layout_constraintTop_toTopOf="@+id/textView16" />
 
             <TextView
                 android:id="@+id/tvFrFecha"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
+                android:layout_width="220dp"
+                android:layout_height="18dp"
                 android:text=""
-                app:layout_constraintStart_toEndOf="@+id/textView17"
+                app:layout_constraintStart_toStartOf="@+id/tvFrAutor"
                 app:layout_constraintTop_toTopOf="@+id/textView17" />
         </androidx.constraintlayout.widget.ConstraintLayout>
 

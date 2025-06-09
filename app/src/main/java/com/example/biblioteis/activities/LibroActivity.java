@@ -96,18 +96,16 @@ public class LibroActivity extends AppCompatActivity {
             if(!libro.getEstado()){
                 etEstado.setText("No Disponible");
             }
-
         });
         //VINCULAR ACCIONES
-        int id = getIntent().getExtras().getInt(BOOK_ID);
-        vm.load(id);
+        int libroId = getIntent().getExtras().getInt(BOOK_ID);
+        vm.load(libroId);
+        int usuarioId = prefs.leer();
         btnPrestar.setOnClickListener(v -> {
-            int usuarioId = prefs.leer();
-            int libroId = id;
-
             vm.prestarLibro(libroId, usuarioId);
         });
-
-
+        btnDevolver.setOnClickListener(v->{
+            vm.devolverlibro(libroId);
+        });
     }
 }
