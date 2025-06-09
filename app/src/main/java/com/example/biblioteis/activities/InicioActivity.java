@@ -21,6 +21,7 @@ import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.biblioteis.R;
+import com.example.biblioteis.utils.ScannerUtils;
 import com.example.biblioteis.utils.ToolbarUtils;
 import com.example.biblioteis.ViewModels.InicioVM;
 import com.example.biblioteis.models.Libro;
@@ -116,6 +117,20 @@ public class InicioActivity extends AppCompatActivity {
         });
         //VINCULAR ACCIONES
         vm.loadLibros();
+    }
+    @Override
+    public void onRequestPermissionsResult(int requestCode,
+                                           @NonNull String[] permissions,
+                                           @NonNull int[] grantResults) {
+        super.onRequestPermissionsResult(requestCode, permissions, grantResults);
+        ScannerUtils.onRequestPermissionsResult(this, requestCode, permissions, grantResults);
+    }
+
+    @Override
+    protected void onActivityResult(int requestCode, int resultCode, Intent data) {
+        if (!ScannerUtils.onActivityResult(this, requestCode, resultCode, data)) {
+            super.onActivityResult(requestCode, resultCode, data);
+        }
     }
 
 

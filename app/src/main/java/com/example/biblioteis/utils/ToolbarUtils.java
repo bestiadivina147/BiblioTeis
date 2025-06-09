@@ -77,6 +77,11 @@ public class ToolbarUtils {
                             .setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK));
                     return true;
                 }
+
+                if (menuItem.getItemId() == R.id.opcion_qr) {
+                    ScannerUtils.launchScanner(activity);
+                    return true;
+                }
                 return false;
             }
 

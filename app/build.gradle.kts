@@ -5,7 +5,6 @@ plugins {
 android {
     namespace = "com.example.biblioteis"
     compileSdk = 35
-
     defaultConfig {
         applicationId = "com.example.biblioteis"
         minSdk = 24
@@ -42,4 +41,16 @@ dependencies {
     androidTestImplementation(libs.espresso.core)
     implementation(libs.retrofit)
     implementation(libs.converter.gson)
+
+    // ZXing dependencies for QR code scanning
+    implementation("androidx.camera:camera-core:1.3.1")
+    implementation("androidx.camera:camera-camera2:1.3.1")
+    implementation("androidx.camera:camera-lifecycle:1.3.1")
+    implementation("androidx.camera:camera-view:1.3.1")
+    implementation("com.google.mlkit:barcode-scanning:17.2.0")
+    implementation("com.google.zxing:core:3.5.1")
+    implementation("com.journeyapps:zxing-android-embedded:4.3.0")
+    implementation("androidx.security:security-crypto:1.1.0-alpha03")
+    implementation("com.journeyapps:zxing-android-embedded:4.3.0@aar")
+
 }
