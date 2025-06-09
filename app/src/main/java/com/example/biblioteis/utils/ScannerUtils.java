@@ -5,27 +5,23 @@ import android.content.Intent;
 import android.content.pm.PackageManager;
 import android.widget.Toast;
 
-import androidx.activity.result.ActivityResultLauncher;
-import androidx.activity.result.contract.ActivityResultContracts;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.core.content.ContextCompat;
 
+import com.example.biblioteis.activities.LibroActivity;
 import com.google.zxing.integration.android.IntentIntegrator;
 import com.google.zxing.integration.android.IntentResult;
 import com.journeyapps.barcodescanner.CaptureActivity;
 
-
-
-
 public class ScannerUtils {
     private static final String CAMERA = Manifest.permission.CAMERA;
+    private static final int REQUEST_CAMERA = 1234;
 
     /** Lanza el escáner ZXing desde cualquier AppCompatActivity. */
     public static void launchScanner(AppCompatActivity activity) {
         if (ContextCompat.checkSelfPermission(activity, CAMERA)
                 != PackageManager.PERMISSION_GRANTED) {
-            // Pide permiso y al conceder relanza el escáner:
-            activity.requestPermissions(new String[]{ CAMERA }, 1234);
+            activity.requestPermissions(new String[]{ CAMERA }, REQUEST_CAMERA);
         } else {
             new IntentIntegrator(activity)
                     .setPrompt("Apunta al código QR o de barras")
@@ -41,9 +37,9 @@ public class ScannerUtils {
                                                   int requestCode,
                                                   String[] permissions,
                                                   int[] grantResults) {
-        if (requestCode == 1234
-                && grantResults.length>0
-                && grantResults[0]==PackageManager.PERMISSION_GRANTED) {
+        if (requestCode == REQUEST_CAMERA
+                && grantResults.length > 0
+                && grantResults[0] == PackageManager.PERMISSION_GRANTED) {
             launchScanner(activity);
         } else {
             Toast.makeText(activity,
@@ -58,16 +54,26 @@ public class ScannerUtils {
                                            Intent data) {
         IntentResult result = IntentIntegrator.parseActivityResult(requestCode, resultCode, data);
         if (result != null) {
-            if (result.getContents() != null) {
-                Toast.makeText(activity,
-                        "Escaneado: " + result.getContents(),
-                        Toast.LENGTH_LONG).show();
+            String contents = result.getContents();
+            if (contents != null) {
+                try {
+                    // Interpretamos el contenido como ID de libro
+                    int bookId = Integer.parseInt(contents);
+                    Intent intent = new Intent(activity, LibroActivity.class);
+                    intent.putExtra(LibroActivity.BOOK_ID, bookId);
+                    activity.startActivity(intent);
+                } catch (NumberFormatException e) {
+                    Toast.makeText(activity,
+                            "Código no válido: " + contents,
+                            Toast.LENGTH_LONG).show();
+                }
             } else {
                 Toast.makeText(activity,
-                        "Escaneo cancelado", Toast.LENGTH_SHORT).show();
+                        "Escaneo cancelado",
+                        Toast.LENGTH_SHORT).show();
             }
-            return true;  // manejado
+            return true;
         }
-        return false;     // no era nuestro escaneo
+        return false;
     }
 }

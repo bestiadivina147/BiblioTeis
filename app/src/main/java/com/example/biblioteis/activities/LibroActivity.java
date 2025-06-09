@@ -20,7 +20,7 @@ import com.example.biblioteis.utils.ToolbarUtils;
 import com.example.biblioteis.ViewModels.DetalleVM;
 
 public class LibroActivity extends AppCompatActivity {
-    protected static final String BOOK_ID = "bookId";
+    public static final String BOOK_ID = "bookId";
 
     private ImageView img;
     private TextView etTitulo, etAutor, etFecha,etISBN,etEstado,etPrestamos,txtNoDisponible;

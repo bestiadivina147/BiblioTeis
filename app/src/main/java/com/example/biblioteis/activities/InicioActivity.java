@@ -131,6 +131,7 @@ public class InicioActivity extends AppCompatActivity {
         if (!ScannerUtils.onActivityResult(this, requestCode, resultCode, data)) {
             super.onActivityResult(requestCode, resultCode, data);
         }
+
     }
 
 
