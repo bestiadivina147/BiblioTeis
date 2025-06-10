@@ -2,11 +2,18 @@ package com.example.biblioteis.utils;
 
 import static android.content.Context.MODE_PRIVATE;
 
+import static androidx.activity.result.ActivityResultCallerKt.registerForActivityResult;
+
+import android.app.Activity;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
+import android.widget.Toast;
+
+import androidx.activity.result.ActivityResultLauncher;
+import androidx.activity.result.contract.ActivityResultContracts;
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
@@ -18,14 +25,31 @@ import com.example.biblioteis.activities.LibreriaActivity;
 import com.example.biblioteis.activities.LibroActivity;
 import com.example.biblioteis.activities.LogingActivity;
 import com.example.biblioteis.activities.UsuarioActivity;
+import com.google.zxing.integration.android.IntentIntegrator;
+import com.google.zxing.integration.android.IntentResult;
+import com.journeyapps.barcodescanner.CaptureActivity;
 
 public class ToolbarUtils {
 
+
+    private static ActivityResultLauncher<Intent> qrLauncher;
 
     public static void setupToolbar(AppCompatActivity activity) {
         Toolbar toolbar = activity.findViewById(R.id.libroToolbar);
         toolbar.setNavigationIcon(R.drawable.icono);
         activity.setSupportActionBar(toolbar);
+
+         qrLauncher = activity.registerForActivityResult(new ActivityResultContracts.StartActivityForResult(), result -> {
+            Intent s = result.getData();
+            ScannerUtils.onActivityResult(activity, 100, -1, s);
+            if (result.getResultCode() == Activity.RESULT_OK && result.getData() != null) {
+                IntentResult scanResult = IntentIntegrator.parseActivityResult(result.getResultCode(), result.getData());
+                if (scanResult != null && scanResult.getContents() != null) {
+                    String qrCode = scanResult.getContents();
+                    Toast.makeText(activity, "QR: " + qrCode, Toast.LENGTH_LONG).show();
+                }
+            }
+        });
 
         IPreferenciasUsuario prefs = new PreferenciasUsuario(activity);
         activity.addMenuProvider(new MenuProvider() {
@@ -79,7 +103,19 @@ public class ToolbarUtils {
                 }
 
                 if (menuItem.getItemId() == R.id.opcion_qr) {
-                    ScannerUtils.launchScanner(activity);
+
+
+                    IntentIntegrator integrator = new IntentIntegrator(activity);
+
+                    integrator.setDesiredBarcodeFormats(IntentIntegrator.QR_CODE);
+                    integrator.setPrompt("Apunta al código QR o de barras");
+                    integrator.setBeepEnabled(true);
+                    integrator.setOrientationLocked(false);
+                    integrator.setCaptureActivity(CaptureActivity.class);
+                    Intent intent = integrator.createScanIntent();
+
+                    qrLauncher.launch(intent);
+
                     return true;
                 }
                 return false;

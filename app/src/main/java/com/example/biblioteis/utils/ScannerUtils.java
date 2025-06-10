@@ -53,10 +53,10 @@ public class ScannerUtils {
                                            int requestCode,
                                            int resultCode,
                                            Intent data) {
-        IntentResult result = IntentIntegrator.parseActivityResult(requestCode, resultCode, data);
-        if (result != null) {
-            String contents = result.getContents();
-            if (contents != null) {
+
+        String contents = data.getStringExtra("SCAN_RESULT");
+        if (contents != null) {
+
                 try {
                     // Interpretamos el contenido como ID de libro
                     int bookId = Integer.parseInt(contents);
@@ -74,7 +74,6 @@ public class ScannerUtils {
                         Toast.LENGTH_SHORT).show();
             }
             return true;
-        }
-        return false;
+
     }
 }

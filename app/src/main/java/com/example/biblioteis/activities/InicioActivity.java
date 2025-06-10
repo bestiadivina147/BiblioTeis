@@ -121,12 +121,4 @@ public class InicioActivity extends AppCompatActivity {
         //VINCULAR ACCIONES
         vm.loadLibros();
     }
-
-
-    @Override
-    protected void onActivityResult(int requestCode, int resultCode, @Nullable Intent data) {
-        super.onActivityResult(requestCode, resultCode, data);
-
-        ScannerUtils.onActivityResult(this, requestCode, resultCode, data);
-    }
 }
