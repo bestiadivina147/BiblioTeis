@@ -24,6 +24,7 @@ public class ScannerUtils {
             activity.requestPermissions(new String[]{ CAMERA }, REQUEST_CAMERA);
         } else {
             new IntentIntegrator(activity)
+                    .setDesiredBarcodeFormats(IntentIntegrator.QR_CODE)
                     .setPrompt("Apunta al código QR o de barras")
                     .setBeepEnabled(true)
                     .setOrientationLocked(false)

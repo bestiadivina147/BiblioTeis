@@ -43,14 +43,14 @@ dependencies {
     implementation(libs.converter.gson)
 
     // ZXing dependencies for QR code scanning
-    implementation("androidx.camera:camera-core:1.3.1")
-    implementation("androidx.camera:camera-camera2:1.3.1")
-    implementation("androidx.camera:camera-lifecycle:1.3.1")
-    implementation("androidx.camera:camera-view:1.3.1")
-    implementation("com.google.mlkit:barcode-scanning:17.2.0")
-    implementation("com.google.zxing:core:3.5.1")
-    implementation("com.journeyapps:zxing-android-embedded:4.3.0")
-    implementation("androidx.security:security-crypto:1.1.0-alpha03")
-    implementation("com.journeyapps:zxing-android-embedded:4.3.0@aar")
+    implementation(libs.camera.core)
+    implementation(libs.camera.camera2)
+    implementation(libs.camera.lifecycle)
+    implementation(libs.camera.view)
+    implementation(libs.barcode.scanning)
+    implementation(libs.core)
+    implementation(libs.journeyapps.zxing.android.embedded)
+    implementation(libs.security.crypto)
+    implementation(libs.journeyapps.zxing.android.embedded)
 
 }
