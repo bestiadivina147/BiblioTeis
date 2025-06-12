@@ -65,6 +65,9 @@ public class UsuarioActivity extends AppCompatActivity {
         vm = new ViewModelProvider(this).get(UsuarioVM.class);
         //OBSERVAR VM
         vm.usuarioLD.observe(this,usuario -> {
+            if (usuario != null) {
+                vm.obtenerImagenLibrosPrestados();
+            }
             List <LibroLending> libroLendings = usuario.getLibros();
 
 

@@ -15,13 +15,13 @@ import com.example.biblioteis.API.repository.UserRepository;
 import com.example.biblioteis.mapper.BookMapper;
 import com.example.biblioteis.mapper.UserMapper;
 import com.example.biblioteis.models.Libro;
+import com.example.biblioteis.models.LibroLending;
 import com.example.biblioteis.models.Usuario;
 
 import okhttp3.ResponseBody;
 
 public class UsuarioVM extends ViewModel {
     public MutableLiveData<Usuario> usuarioLD= new MutableLiveData<>();
-    public MutableLiveData<Libro> librosLD= new MutableLiveData<>();
     public UserRepository userRepository = new UserRepository();
     public BookRepository bookRepository = new BookRepository();
     public ImageRepository imageRepository = new ImageRepository();
@@ -42,44 +42,31 @@ public class UsuarioVM extends ViewModel {
 
     }
 
+    public void obtenerImagenLibrosPrestados() {
+        Usuario usuario = usuarioLD.getValue();
+        if (usuario == null || usuario.getLibros() == null) return;
 
-    public void loadLibro(int id) {
-        bookRepository.getBookById(id, new BookRepository.ApiCallback<Book>() {
-            @Override
-            public void onSuccess(Book result) {
-                Libro libro = BookMapper.book2Libro(result);
-                librosLD.setValue(libro);
-                obtenLibroImagen(result.getBookPicture(), libro);
-            }
+        for (LibroLending lending : usuario.getLibros()) {
+            Libro libro = lending.getLibro();
+            if (libro == null || libro.getImagen() == null) continue;
 
-            @Override
-            public void onFailure(Throwable t) {
+            imageRepository.getImage(libro.getImagen(), new BookRepository.ApiCallback<ResponseBody>() {
+                @Override
+                public void onSuccess(ResponseBody result) {
+                    if (result == null) return;
 
-            }
-        });
-
-    }
-
-    private void obtenLibroImagen(String urlImg, Libro libro) {
-        if(urlImg==null){
-            return;
-        }
-        imageRepository.getImage(urlImg, new BookRepository.ApiCallback<ResponseBody>() {
-            @Override
-            public void onSuccess(ResponseBody result) {
-                if (result == null){
-                    return;
+                    Bitmap bm = BitmapFactory.decodeStream(result.byteStream());
+                    libro.setImg(bm);
+                    usuarioLD.setValue(usuario); // Actualiza los datos del usuario con las imágenes cargadas
                 }
-                Bitmap bm = BitmapFactory.decodeStream(result.byteStream());
-                libro.setImg(bm);
-                librosLD.postValue(libro);
-            }
 
-            @Override
-            public void onFailure(Throwable t) {
-                //TODO
-                Log.e("LibreriaVM", "Error load books", t);
-            }
-        });
+                @Override
+                public void onFailure(Throwable t) {
+                    Log.e("UsuarioVM", "Error al obtener imagen del libro", t);
+                }
+            });
+        }
     }
+
+
 }
